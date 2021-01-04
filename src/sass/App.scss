@@ -1,0 +1,23 @@
+*,*:before,*:after{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+:root{
+    --green-color:#7CD19E;
+    --red-color:#EE2A3E;
+    --light-text:#6C545C;
+    --normal-text:#000000;
+    --not-normal-text:#fff;
+    --not-normal-light-text:rgba(255, 255, 255, 0.699);
+}
+body{
+    font-family: 'Montserrat', sans-serif;
+}
+
+
+@import "./config";
+@import './landingPage';
+@import "./homepage";
+@import "./responsive"

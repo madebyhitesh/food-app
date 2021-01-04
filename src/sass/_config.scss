@@ -1,0 +1,41 @@
+.green-text{
+    color: var(--green-color);
+}
+
+
+.btn{
+    border: none;
+    border-radius: 6px;
+    font-size: 1.2rem;
+    padding: .3rem .5rem;
+}
+.green-button{
+    background-color: var(--green-color);
+    color: var(--not-normal-text);
+}
+.red-button{
+    background-color: var(--red-color);
+    color: var(--not-normal-text);
+}
+.transparent-button{
+    background-color: transparent;
+    color: var(--normal-text);
+    border: 2px solid var(--normal-text);
+}
+.light-text{
+    color: var(--light-text);
+    font-weight: 400;
+}
+
+.normal-text{
+    font-weight: 600;
+    color: var(--normal-text);
+}
+
+.title-text{
+    font-weight: 700;
+    color: var(--normal-text);
+
+}
+
+

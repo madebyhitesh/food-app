@@ -1,23 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
-
+import React,{useState} from "react"
+import {BrowserRouter as Router,Route,Switch} from 'react-router-dom'
+import Homepage from "./components/Homepage"
+import LandingPage from "./components/LandingPage"
+import './sass/App.css'
 function App() {
+  const [width]  = useState(window.innerWidth)
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <LandingPage/>
+      <Homepage/>
+     {/* <Router>
+      <Switch>
+        <Route exact path="/" component={LandingPage}/>
+        {
+          width <= 500 ? <Route exact path="/home" component={Homepage}/> : ""
+        }
+        
+      </Switch>
+      </Router> 
+      {width >= 500 ? <Homepage/> : ""} */}
     </div>
   );
 }
