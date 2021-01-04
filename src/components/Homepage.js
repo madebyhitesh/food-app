@@ -6,7 +6,7 @@ import {specialMenu,popularItems} from '../data'
 export default function Homepage() {
 
     const animation =  useAnimation()
-    const [ref, inView, entry] = useInView({ threshold: 0 });
+    const [ref, inView] = useInView({ threshold: 0 });
 
     useEffect(() => {
       if (inView) {
