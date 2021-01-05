@@ -62,7 +62,7 @@ body {
 
 .landing-page {
   max-width: 100vw;
-  padding: .5rem 1.4rem;
+  padding: .5rem;
 }
 
 .landing-page header {
@@ -353,7 +353,7 @@ body {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  gap: .5rem;
+  gap: 1rem;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -413,7 +413,7 @@ body {
 
 @media all and (min-width: 500px) {
   .landing-page {
-    min-height: 300px;
+    padding: .5rem 1rem;
   }
   .landing-page header .menu-icon {
     display: none;
@@ -450,6 +450,9 @@ body {
             transform: scale(1.1);
     -webkit-transform-origin: center;
             transform-origin: center;
+  }
+  .landing-page header .nav-links ul li:not(:first-child) {
+    margin-top: 0;
   }
   .landing-page .content-wrapper {
     width: 100%;
