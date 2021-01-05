@@ -3,10 +3,11 @@ import Homepage from "./components/Homepage"
 import LandingPage from "./components/LandingPage"
 import './sass/App.css'
 function App() {
+  const [theme,setTheme] = useState(false)
 
   return (
-    <div className="App">
-      <LandingPage/>
+    <div className={theme ? 'App dark-mode' : 'App'}>
+      <LandingPage setTheme={setTheme} theme={theme}/>
       <Homepage/>
     </div>
   );

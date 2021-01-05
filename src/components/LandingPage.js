@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import {motion} from "framer-motion"
 import landingImage from "../assets/landing.svg"
 
-export default function LandingPage() {
+export default function LandingPage({theme,setTheme}) {
 
     const [isOpen,setIsOpen] = useState(false)
 
@@ -27,27 +27,30 @@ export default function LandingPage() {
 
                <motion.div className="nav-links" animate={{x:isOpen && window.innerWidth<500 ? 200 : 0}} >
                    <ul>
-                       <li className="navlink normal-text active">
+                       <li className="navlink  active">
                         Home
                        </li>
-                       <li className="navlink normal-text">
+                       <li className="navlink">
                         Offers
                        </li>
-                       <li className="navlink normal-text">
+                       <li className="navlink">
                         My Orders
                        </li>
-                       <li className="navlink normal-text">
+                       <li className="navlink">
                         Contact
+                       </li>
+                       <li className="theme-button" onClick={()=>setTheme(!theme)}>
+                            {theme ? <i class="fas fa-sun"></i> : <i class="fas fa-moon"></i>} Theme
                        </li>
                    </ul>
                </motion.div>
 
                <div className="nav-icons">
                    <div className="cart">
-                   <i className="fas fa-shopping-basket"></i>
+                   <i className="fas fa-shopping-basket normal-text"></i>
                    </div>
                    <div className="profile">
-                   <i className="fas fa-user-circle"></i>
+                   <i className="fas fa-user-circle normal-text"></i>
                    </div>
                </div>
            </header>

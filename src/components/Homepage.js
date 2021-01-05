@@ -103,9 +103,9 @@ export default function Homepage() {
                                 <motion.div className="text-container" 
                                     variants={item}
                                     >
-                                        <h3 >{card.name}</h3>
-                                        <p>by {card.chef}</p>
-                                        <h3><span className="light-text">$</span>2.99</h3>
+                                        <h3 className="normal-text">{card.name}</h3>
+                                        <p className="light-text">by {card.chef}</p>
+                                        <h3 className="normal-text"><small className="light-text">$</small> 2.99</h3>
                                 </motion.div>
                                 <motion.div className="cart-button" 
                                     variants={item}

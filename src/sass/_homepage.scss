@@ -1,7 +1,7 @@
 .home-page{
-    margin-top:2rem;
+    padding-top:2rem;
     padding: 1rem;
-   // background-color: darken(#fff,5%);
+    background-color: var(--background);
     .carousel-header{
         display:flex;
         align-items:center;
