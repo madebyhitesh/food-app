@@ -1,7 +1,7 @@
 .home-page{
     margin-top:2rem;
     padding: 1rem;
-    background-color: darken(#fff,5%);
+   // background-color: darken(#fff,5%);
     .carousel-header{
         display:flex;
         align-items:center;
@@ -99,10 +99,10 @@
         max-width: 350px;
         align-items: center;
         text-align: center;
-        box-shadow: 0px 8px 29px rgba(0, 0, 0, 0.23);
+        //box-shadow: 0px 8px 29px rgba(0, 0, 0, 0.23);
         padding:1rem;
         border-radius: 6px;
-        background-color: var(--not-normal-text);
+        background-color: var(--light-background);
         .text-container{
             white-space: nowrap;
         }
@@ -124,6 +124,25 @@
                 white-space: nowrap;
             }
         }
+    }
+
+    .flex-container{
+        display:flex;
+        flex-direction: column;
+        justify-content:space-between;
+        align-items: center;
+        margin-top:1.4rem;
+        
+        .text-container{
+            p{
+                margin-top:.5rem;
+            }
+        }
+
+        .image-container{
+            margin-top:1.4rem;
+        }
+
     }
    
   

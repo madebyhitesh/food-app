@@ -2,6 +2,7 @@ import React,{useEffect} from 'react'
 import {useInView} from "react-intersection-observer"
 import { motion,useAnimation} from "framer-motion";
 import {specialMenu,popularItems} from '../data'
+import Delivery from "../assets/delivery.svg"
 
 export default function Homepage() {
 
@@ -118,6 +119,18 @@ export default function Homepage() {
                         })
                     }
                 </motion.div>
+
+                <div className="flex-container">
+                    <div className="text-container">
+                    <h2 className="normal-text">
+                    Delivering Your Favourite Food In <span className="green-text">30 Minutes.</span>
+                    </h2>
+                    <p className="light-text">It is a long established fact that a reader will be distracted by the readable content of page when looking at the layout.</p>
+                    </div>
+                    <div className="image-container">
+                        <img src={Delivery} alt="delivery"/>
+                    </div>
+                </div>
                 
             </div>
 
