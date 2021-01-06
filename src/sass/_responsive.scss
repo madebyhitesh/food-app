@@ -19,15 +19,22 @@
                     justify-content: center;
                     padding: 0;
                     li{
+                        cursor: pointer;
+                    }
+                    .navlink{
                         margin: 0 1rem;
                         color: var(--light-text);
                         cursor: pointer;
                         font-size: 1rem;
                     }
-                    li.active{
+                    .navlink.active{
                         color:var(--normal-text);
                         transform: scale(1.1);
                         transform-origin: center;
+                    }
+                    .theme-button{
+                        color:var(--normal-text);
+                        font-size:1rem;
                     }
                     li:not(:first-child){
                         margin-top: 0;
@@ -85,6 +92,14 @@
                 align-items:center;
                 justify-content:center;
             }
+        }
+    }
+
+
+    .menu-page{
+
+        .items-container{
+            grid-template-columns: 1fr 1fr 1fr 1fr;
         }
     }
 }

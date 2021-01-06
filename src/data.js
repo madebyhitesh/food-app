@@ -6,13 +6,47 @@ import Ramen from "./assets/ramen.png"
 import Sushi from "./assets/sushi.png"
 import Chicken from "./assets/chicken.png"
 import Salad from "./assets/salad.png"
+import Burger_1 from './assets/Burgers/burger_1.svg'
+import Burger_2 from './assets/Burgers/burger_2.svg'
+import Burger_3 from './assets/Burgers/burger_3.svg'
+import Burger_4 from './assets/Burgers/burger_4.svg'
 
 export const specialMenu = [
 
     {
     title:"Burgers",
     image:Burger,
-    colorScheme:"first"
+    colorScheme:"first",
+    items:[
+        {
+            id:"1",
+            name:"HamBurger",
+            chef:"Rock Lee",
+            image:Burger_1,
+            price:4.5
+        },
+        {
+            id:"2",
+            name:"Cheese Burger",
+            chef:"Negi Hugo",
+            image:Burger_2,
+            price:4.5
+        },
+        {
+            id:"3",
+            name:"Egg Burger",
+            chef:"Shikamaru",
+            image:Burger_3,
+            price:4.5
+        },
+        {
+            id:"4",
+            name:"Knuckle Sandwich",
+            chef:"Might Guy",
+            image:Burger_4,
+            price:4.5
+        },
+    ]
     },
     {
     title:"Chinese",

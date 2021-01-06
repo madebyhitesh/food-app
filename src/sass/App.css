@@ -23,7 +23,7 @@ body {
 .App.dark-mode {
   --normal-text:#ffffff;
   --background:rgb(14, 13, 13);
-  --light-background:rgb(20, 19, 19);
+  --light-background:rgb(29, 28, 28);
   --light-text:#585858;
   --not-normal-light-text:rgba(0, 0, 0, 0.699);
   --not-normal-text:rgb(0, 0, 0);
@@ -35,8 +35,20 @@ body {
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: rgba(0, 0, 0, 0.74);
+  background-color: rgba(0, 0, 0, 0.8);
   z-index: 11111111;
+}
+
+.loader {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .green-text {
@@ -79,6 +91,11 @@ body {
 .title-text {
   font-weight: 700;
   color: var(--normal-text);
+}
+
+.white-text {
+  font-weight: 600;
+  color: #fff;
 }
 
 .landing-page {
@@ -139,12 +156,12 @@ body {
   font-weight: 600;
 }
 
-.landing-page header .nav-links ul li {
+.landing-page header .nav-links ul .navlink {
   color: var(--not-normal-light-text);
   cursor: pointer;
 }
 
-.landing-page header .nav-links ul li.active {
+.landing-page header .nav-links ul .navlink.active {
   color: var(--not-normal-text);
   -webkit-transform: scale(1.1);
           transform: scale(1.1);
@@ -156,11 +173,12 @@ body {
   margin-top: 1rem;
 }
 
-.landing-page header .nav-links .theme-btn {
-  color: var(--normal-text);
+.landing-page header .nav-links .theme-button {
+  color: var(--not-normal-text);
+  font-weight: 600;
 }
 
-.landing-page header .nav-links .theme-btn i {
+.landing-page header .nav-links .theme-button i {
   -webkit-transition: all .3s ease;
   transition: all .3s ease;
 }
@@ -453,6 +471,103 @@ body {
   margin-top: 1.4rem;
 }
 
+.menu-page {
+  background-color: rgba(0, 0, 0, 0.849);
+  z-index: 111111111111;
+  padding-top: 1rem;
+}
+
+.menu-page .cross-btn {
+  position: absolute;
+  background-color: transparent;
+  color: #fff;
+  border: none;
+  font-size: 1.4rem;
+  right: 1rem;
+  top: 1rem;
+}
+
+.menu-page .page-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.menu-page .items-container {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding-top: 1rem;
+  gap: 1.4rem 0;
+}
+
+.menu-page .items-container .item-card {
+  -ms-flex-item-align: center;
+      align-self: center;
+  justify-self: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.menu-page .items-container .item-card .hero {
+  height: 4rem;
+}
+
+.menu-page .items-container .item-card .hero img {
+  height: 100%;
+}
+
+.menu-page .items-container .item-card .text-container {
+  padding-top: 1rem;
+  color: #fff;
+  text-align: center;
+}
+
+.menu-page .items-container .item-card .text-container small, .menu-page .items-container .item-card .text-container p {
+  font-weight: 400;
+  color: rgba(209, 209, 209, 0.719);
+}
+
+.menu-page .items-container .item-card .text-container p {
+  margin: .3rem 0;
+}
+
+.menu-page .items-container .add-to-cart {
+  width: 100%;
+  margin: .5rem;
+}
+
+.menu-page .items-container .add-to-cart button {
+  width: 100%;
+  border: none;
+  padding: .3rem .5rem;
+  border-radius: 6px;
+}
+
 @media all and (min-width: 500px) {
   .landing-page {
     padding: .5rem 1rem;
@@ -481,17 +596,24 @@ body {
     padding: 0;
   }
   .landing-page header .nav-links ul li {
+    cursor: pointer;
+  }
+  .landing-page header .nav-links ul .navlink {
     margin: 0 1rem;
     color: var(--light-text);
     cursor: pointer;
     font-size: 1rem;
   }
-  .landing-page header .nav-links ul li.active {
+  .landing-page header .nav-links ul .navlink.active {
     color: var(--normal-text);
     -webkit-transform: scale(1.1);
             transform: scale(1.1);
     -webkit-transform-origin: center;
             transform-origin: center;
+  }
+  .landing-page header .nav-links ul .theme-button {
+    color: var(--normal-text);
+    font-size: 1rem;
   }
   .landing-page header .nav-links ul li:not(:first-child) {
     margin-top: 0;
@@ -561,6 +683,10 @@ body {
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;
+  }
+  .menu-page .items-container {
+    -ms-grid-columns: 1fr 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
   }
 }
 /*# sourceMappingURL=App.css.map */

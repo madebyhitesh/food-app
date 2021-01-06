@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import {motion} from "framer-motion"
 import landingImage from "../assets/landing.svg"
+import Overlay from "./Overlay"
 
 export default function LandingPage({theme,setTheme}) {
 
@@ -40,7 +41,7 @@ export default function LandingPage({theme,setTheme}) {
                         Contact
                        </li>
                        <li className="theme-button" onClick={()=>setTheme(!theme)}>
-                            {theme ? <i class="fas fa-sun"></i> : <i class="fas fa-moon"></i>} Theme
+                            {theme ? <i className="fas fa-sun"></i> : <i className="fas fa-moon"></i>} Theme
                        </li>
                    </ul>
                </motion.div>
@@ -105,7 +106,7 @@ export default function LandingPage({theme,setTheme}) {
            </div>
            </div>
 
-        {isOpen && <div onClick={e=>setIsOpen(false)} className="overlay"></div>}
+        {isOpen && <Overlay onClick={e=>setIsOpen(false)} />}
        </div>
     )
 }

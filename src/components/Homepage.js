@@ -1,13 +1,19 @@
-import React,{useEffect} from 'react'
+import React,{useEffect,useContext,useState} from 'react'
+import DataContext from '../DataContext'
 import {useInView} from "react-intersection-observer"
 import { motion,useAnimation} from "framer-motion";
-import {specialMenu,popularItems} from '../data'
 import Delivery from "../assets/delivery.svg"
+import SubMenuItems from "./SubMenuItems"
 
 export default function Homepage() {
 
     const animation =  useAnimation()
     const [ref, inView] = useInView({ threshold: 0 });
+    const [currentMenuItem,setCurrentMenuItem] =  useState([])
+
+    const allData =  useContext(DataContext)
+
+    console.log(currentMenuItem)
 
     useEffect(() => {
       if (inView) {
@@ -55,13 +61,14 @@ export default function Homepage() {
             variants={container}
             >
             {
-                    specialMenu.map((menuItem,idx)=>{
+                    allData.specialMenu.map((menuItem,idx)=>{
                         return(
                             <motion.div className={`card ${menuItem.colorScheme}`} 
                             key={idx}
                             initial="hidden"
                             animate="visible"
                             variants={container}
+                            onClick={e=>setCurrentMenuItem(menuItem)}
                             >
                             <motion.img src={menuItem.image} alt={menuItem.title} />
                             <h3 className="normal-text">{menuItem.title}</h3>
@@ -85,14 +92,14 @@ export default function Homepage() {
                 >
                 
                     {
-                        popularItems.map((card,idx)=>{
+                        allData.popularItems.map((card,idx)=>{
                             return(
                                 <motion.div className="cart-card"
                                 key={idx}
                                 ref={ref}
-                                 initial="hidden"
-                                 animate={animation}
-                                 variants={container}
+                                initial="hidden"
+                                animate={animation}
+                                variants={container}
                                 >
                                 <motion.div className="hero"
                                     variants={item}
@@ -131,7 +138,9 @@ export default function Homepage() {
                         <img src={Delivery} alt="delivery"/>
                     </div>
                 </div>
-                
+                {
+                    currentMenuItem.length !== 0 && <SubMenuItems data={currentMenuItem} status={setCurrentMenuItem}/>
+                }
             </div>
 
     )

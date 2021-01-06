@@ -35,11 +35,11 @@
             padding: 1.5rem 1rem;
             font-size: 1.4rem;
             font-weight: 600;
-            li{
+            .navlink{
                 color: var(--not-normal-light-text);
                 cursor: pointer;
             }
-            li.active{
+            .navlink.active{
                 color:var(--not-normal-text);
                 transform: scale(1.1);
                 transform-origin: center;
@@ -48,8 +48,9 @@
         li:not(:first-child){
             margin-top: 1rem;
         }
-        .theme-btn{
-            color:var(--normal-text);
+        .theme-button{
+            color:var(--not-normal-text);
+            font-weight: 600;
             i{
                 transition: all .3s ease;
             }
