@@ -51,54 +51,84 @@ export const specialMenu = [
     {
     title:"Chinese",
     image:Sushi,
-    colorScheme:"second"
+    colorScheme:"second",
+    items:[
+        {
+            id:"5",
+            name:"Haka Noodles",
+            image:Noodles,
+            chef:"Lee Xiong"
+        },
+        {
+            id:"6",
+            name:"Kakashi Sushi",
+            image:Sushi,
+            chef:"Obito"
+        },
+        {
+            id:"7",
+            name:"Kakashi Sushi",
+            image:Sushi,
+            chef:"Obito"
+        },
+        {
+            id:"8",
+            name:"Naruto Ramen",
+            image:Ramen,
+            chef:"Ichi Raku"
+        },
+    ]
     },
     {
     title:"Pizzas",
     image:Pizza,
-    colorScheme:"fourth"
+    colorScheme:"fourth",
+    items:[]
     },
     {
     title:"Chocolatey",
     image:Chocolate,
-    colorScheme:"third"
+    colorScheme:"third",
+    items:[]
     },
     {
     title:"Non Veg",
     image:Chicken,
-    colorScheme:"first"
+    colorScheme:"first",
+    items:[]
     },
     {
     title:"Healthy",
     image:Salad,
-    colorScheme:"fourth"
+    colorScheme:"fourth",
+    items:[]
     },
 ]
 
 export const popularItems = [
     {
+        id:"5",
         name:"Haka Noodles",
         image:Noodles,
         chef:"Lee Xiong"
     },
     {
+        id:"6",
         name:"Kakashi Sushi",
         image:Sushi,
         chef:"Obito"
     },
     {
+        id:"7",
         name:"Kakashi Sushi",
         image:Sushi,
         chef:"Obito"
     },
     {
-        name:"Naruto Ramen",
-        image:Ramen,
-        chef:"Ichi Raku"
-    },
-    {
-        name:"Naruto Ramen 2",
-        image:Ramen,
-        chef:"Ichi Raku"
+        id:"2",
+        name:"Cheese Burger",
+        chef:"Negi Hugo",
+        image:Burger_2,
+        price:4.5
     },
 ]

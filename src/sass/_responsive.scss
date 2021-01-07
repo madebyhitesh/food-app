@@ -102,5 +102,52 @@
             grid-template-columns: 1fr 1fr 1fr 1fr;
         }
     }
+
+
+    footer{
+
+        .top-section{
+            flex-direction: row;
+
+            .section-left{
+                flex:.7;
+
+                nav{
+                    display:flex;
+                    ul{
+                        display:flex;
+                        color:var(--normal-text);
+                        list-style: none;
+                        li:not(:first-child){
+                            margin:0 2rem;
+                        }
+                    }
+                }
+
+                .social-icons{
+                    width:40%;
+                    margin-top:1rem;
+                }
+            }
+
+            .section-right{
+                flex:.3;
+                margin-top:0;
+            }
+        }
+
+        .bottom-section{
+            display:flex;
+            address{
+                flex:.7;
+            }
+            .contact{
+                flex:.3;
+                display:flex;
+                flex-direction:column;
+                align-items: flex-end;
+            }
+        }
+    }
 }
 
