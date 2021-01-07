@@ -9,6 +9,7 @@ function App() {
   const [theme,setTheme] = useState(false)
   const [loading,setLoading] = useState(true)
 
+
   useEffect(() => {
     setLoading(false);
     if(localStorage.getItem("theme")){

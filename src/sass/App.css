@@ -105,7 +105,7 @@ input, button {
 .landing-page {
   max-width: 100vw;
   padding: .5rem;
-  background-color: var(--background);
+  background-color: var(--light-background);
 }
 
 .landing-page header {
@@ -246,10 +246,9 @@ input, button {
   margin: 1rem auto;
   width: 100%;
   height: 2.5rem;
-  border-bottom-left-radius: 6px;
-  border-top-left-radius: 6px;
-  -webkit-box-shadow: 0px 8px 29px rgba(0, 0, 0, 0.23);
-          box-shadow: 0px 8px 29px rgba(0, 0, 0, 0.23);
+  border-radius: 6px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+          box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
   background-color: var(--light-background);
 }
 
@@ -293,7 +292,7 @@ input, button {
 .home-page {
   padding-top: 2rem;
   padding: 1rem;
-  background-color: var(--background);
+  background-color: var(--light-background);
 }
 
 .home-page .carousel-header {
@@ -421,7 +420,7 @@ input, button {
   text-align: center;
   padding: 1rem;
   border-radius: 6px;
-  background-color: var(--light-background);
+  background-color: var(--background);
 }
 
 .home-page .cart-card .text-container {
@@ -574,7 +573,7 @@ input, button {
 
 footer {
   padding: 1rem;
-  background-color: var(--light-background);
+  background-color: var(--background);
 }
 
 footer .top-section {
@@ -623,8 +622,9 @@ footer .top-section .section-right form {
           align-items: center;
   height: 2rem;
   background-color: var(--background);
-  border-bottom-left-radius: 6px;
-  border-top-left-radius: 6px;
+  border-radius: 6px;
+  -webkit-box-shadow: rgba(29, 29, 29, 0.267) 1.95px 1.95px 2.6px;
+          box-shadow: rgba(29, 29, 29, 0.267) 1.95px 1.95px 2.6px;
 }
 
 footer .top-section .section-right form input {
@@ -804,12 +804,18 @@ footer .bottom-section .contact {
     color: var(--normal-text);
     list-style: none;
   }
+  footer .top-section .section-left nav ul li {
+    font-weight: 600;
+  }
   footer .top-section .section-left nav ul li:not(:first-child) {
     margin: 0 2rem;
   }
   footer .top-section .section-left .social-icons {
     width: 40%;
     margin-top: 1rem;
+  }
+  footer .top-section .section-left .social-icons i {
+    color: var(--red-color);
   }
   footer .top-section .section-right {
     -webkit-box-flex: .3;

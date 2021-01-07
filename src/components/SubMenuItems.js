@@ -1,7 +1,7 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 
-export default function SubMenuItems({data,status}) {
+export default function SubMenuItems({data,status,title}) {
 
     
     const container = {
@@ -25,10 +25,10 @@ export default function SubMenuItems({data,status}) {
     }
     return (
         <div className="overlay menu-page">
-            <button className="cross-btn" onClick={e=>status([])}><i className="fas fa-times"></i></button>
+            <button className="cross-btn" onClick={e=>status(false)}><i className="fas fa-times"></i></button>
             <div className="page-header">
                 <h2 className="white-text">
-                {data.title}
+                {title}
                 </h2>
             </div>
 
@@ -38,7 +38,7 @@ export default function SubMenuItems({data,status}) {
             variants={container}
             >
             {
-               data.items.map(({name,image,chef,price,id})=>(
+               data.map(({name,image,chef,price,id})=>(
                  <motion.div className="item-card" key={id} variants={item}>
                      <motion.div className="hero" 
                      animate={

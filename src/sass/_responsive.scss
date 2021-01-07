@@ -118,6 +118,9 @@
                         display:flex;
                         color:var(--normal-text);
                         list-style: none;
+                        li{
+                            font-weight: 600;
+                        }
                         li:not(:first-child){
                             margin:0 2rem;
                         }
@@ -127,6 +130,9 @@
                 .social-icons{
                     width:40%;
                     margin-top:1rem;
+                    i{
+                        color:var(--red-color)
+                    }
                 }
             }
 

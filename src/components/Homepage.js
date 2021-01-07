@@ -3,17 +3,29 @@ import DataContext from '../DataContext'
 import {useInView} from "react-intersection-observer"
 import { motion,useAnimation} from "framer-motion";
 import Delivery from "../assets/delivery.svg"
+import useFirestore from "../firebase/useFirestore"
 import SubMenuItems from "./SubMenuItems"
 
 export default function Homepage() {
 
     const animation =  useAnimation()
     const [ref, inView] = useInView({ threshold: 0 });
+    const [isMenuOpen,setIsMenuOpen] = useState(false)
+    const [currentCategory,setCurrentCategory] =  useState("")
     const [currentMenuItem,setCurrentMenuItem] =  useState([])
+
+    const {docs} =  useFirestore("products");
+
+    useEffect(()=>{
+        const items = docs.filter(doc => doc.category === currentCategory)
+        setCurrentMenuItem(items)
+    },[currentCategory])
+
+    console.log("current",currentCategory)
+    console.log("currentItems",currentMenuItem)
 
     const allData =  useContext(DataContext)
 
-    console.log(currentMenuItem)
 
     useEffect(() => {
       if (inView) {
@@ -23,6 +35,11 @@ export default function Homepage() {
       }
     }, [animation, inView]);
 
+    //when user click on the special menu card
+    const onMenuClick = (title) =>{
+        setIsMenuOpen(true)
+        setCurrentCategory(title)
+    }
 
 
     const container = {
@@ -68,7 +85,7 @@ export default function Homepage() {
                             initial="hidden"
                             animate="visible"
                             variants={container}
-                            onClick={e=>setCurrentMenuItem(menuItem)}
+                            onClick={()=>onMenuClick(menuItem.title)}
                             >
                             <motion.img src={menuItem.image} alt={menuItem.title} />
                             <h3 className="normal-text">{menuItem.title}</h3>
@@ -139,7 +156,7 @@ export default function Homepage() {
                     </div>
                 </div>
                 {
-                    currentMenuItem.length !== 0 && <SubMenuItems data={currentMenuItem} status={setCurrentMenuItem}/>
+                    isMenuOpen && <SubMenuItems data={currentMenuItem} status={setIsMenuOpen} title={currentCategory}/>
                 }
             </div>
 

@@ -1,4 +1,4 @@
-import Burger from "./assets/burger.png"
+import Burger from "./assets/burger.svg"
 import Pizza from "./assets/pizza.png"
 import Chocolate from "./assets/chocolate.png"
 import Noodles from "./assets/noodles.png"

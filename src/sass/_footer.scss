@@ -1,6 +1,6 @@
 footer{
     padding:1rem;
-    background-color:var(--light-background);
+    background-color:var(--background);
     .top-section{
         width:100%;
         display:flex;
@@ -28,8 +28,9 @@ footer{
                 align-items:center;
                 height:2rem;
                 background-color: var(--background);
-                border-bottom-left-radius:6px;
-                border-top-left-radius:6px;
+                border-radius: 6px;
+                box-shadow: rgba(29, 29, 29, 0.267) 1.95px 1.95px 2.6px;
+
                 input{
                     border:none;
                     height:100%;
