@@ -6,23 +6,40 @@ import Delivery from "../assets/delivery.svg"
 import useFirestore from "../firebase/useFirestore"
 import SubMenuItems from "./SubMenuItems"
 
-export default function Homepage() {
+export default function Homepage({dispatch}) {
 
     const animation =  useAnimation()
     const [ref, inView] = useInView({ threshold: 0 });
     const [isMenuOpen,setIsMenuOpen] = useState(false)
     const [currentCategory,setCurrentCategory] =  useState("")
     const [currentMenuItem,setCurrentMenuItem] =  useState([])
+    const [popularItemsData,setPopularItemsData] = useState([])
+    const [popularItems] = useState(["4MVcMDuBk9UHE1gKmPYP","T2kJy9BXRG9SHTrvndfs","fE2A2ZC9fhZRRf89iq0R","CBzonQXWX8a5A7w2vhWn"]);
+
 
     const {docs} =  useFirestore("products");
+
+    console.log(docs)
+
+    //get the data for popular items ids
+
+    useEffect(()=>{
+        let itemsData = [];
+        popularItems.forEach(async item=>{
+            const data =  docs.filter(doc=>doc.id === item);
+            if(data[0])
+            itemsData.push(data[0])
+        })
+
+        setPopularItemsData(itemsData);
+    },[popularItems])
+   
+    console.log("popitems",popularItemsData)
 
     useEffect(()=>{
         const items = docs.filter(doc => doc.category === currentCategory)
         setCurrentMenuItem(items)
     },[currentCategory])
-
-    console.log("current",currentCategory)
-    console.log("currentItems",currentMenuItem)
 
     const allData =  useContext(DataContext)
 
@@ -108,40 +125,39 @@ export default function Homepage() {
                   variants={container}
                 >
                 
-                    {
-                        allData.popularItems.map((card,idx)=>{
-                            return(
-                                <motion.div className="cart-card"
-                                key={idx}
-                                ref={ref}
-                                initial="hidden"
-                                animate={animation}
-                                variants={container}
-                                >
-                                <motion.div className="hero"
-                                    variants={item}
-                                    >
-                                    <img src={card.image} alt={card.name}/>
-                                </motion.div>
-                
-                                <motion.div className="text-container" 
-                                    variants={item}
-                                    >
-                                        <h3 className="normal-text">{card.name}</h3>
-                                        <p className="light-text">by {card.chef}</p>
-                                        <h3 className="normal-text"><small className="light-text">$</small> 2.99</h3>
-                                </motion.div>
-                                <motion.div className="cart-button" 
-                                    variants={item}
-                                    >
-                                        <button className="red-button">
-                                            Add to Cart
-                                        </button>
-                                </motion.div>
-                                </motion.div>   
-                            )
-                        })
-                    }
+                {
+                popularItemsData.map(card=>(
+                        
+                <motion.div className="cart-card"
+                key={card.id}
+                ref={ref}
+                initial="hidden"
+                animate={animation}
+                variants={container}
+                >
+                <motion.div className="hero"
+                variants={item}
+                >
+                 <img src={card.image} alt={card.name}/>
+                </motion.div>
+
+                <motion.div className="text-container" 
+                variants={item}
+                >
+                    <h3 className="normal-text">{card.name}</h3>
+                    <p className="light-text">by {card.chef}</p>
+                    <h3 className="normal-text"><i className="fas fa-rupee-sign"></i> {card.price}</h3>
+                </motion.div>
+                <motion.div className="cart-button" 
+                variants={item}
+                >
+                    <button className="red-button">
+                        Add to Cart
+                    </button>
+                </motion.div>
+                </motion.div>   
+                ))
+                }     
                 </motion.div>
 
                 <div className="flex-container">
@@ -156,7 +172,13 @@ export default function Homepage() {
                     </div>
                 </div>
                 {
-                    isMenuOpen && <SubMenuItems data={currentMenuItem} status={setIsMenuOpen} title={currentCategory}/>
+                    isMenuOpen && 
+                    <SubMenuItems 
+                    data={currentMenuItem} 
+                    status={setIsMenuOpen} 
+                    title={currentCategory}
+                    dispatch={dispatch}
+                    />
                 }
             </div>
 

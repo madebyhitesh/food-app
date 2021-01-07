@@ -60,8 +60,25 @@
     .nav-icons{
         i{
             font-size: 1.4rem;
-            &:first-child{
-                margin-right: 1rem;
+        }
+        
+        .cart{
+            margin-right: 1.4rem;
+            position:relative;
+            span{
+                top:-50%;
+                right:-50%;
+                height:1rem;
+                width:1rem;
+                font-weight: 600;
+                position:absolute;
+                display:flex;
+                align-items: center;
+                justify-content: center;
+                background-color: var(--red-color);
+                color:var(--not-normal-text);
+                padding:12px;
+                border-radius:50%;
             }
         }
     }

@@ -3,9 +3,9 @@ import {motion} from "framer-motion"
 import landingImage from "../assets/landing.svg"
 import Overlay from "./Overlay"
 
-export default function LandingPage({theme,setTheme}) {
+export default function LandingPage({theme,setTheme,cart}) {
 
-    const [isOpen,setIsOpen] = useState(false)
+    const [isOpen,setIsOpen] = useState(false);
 
     const variants = {
         hidden: { x: "100%" },
@@ -49,6 +49,12 @@ export default function LandingPage({theme,setTheme}) {
                <div className="nav-icons">
                    <div className="cart">
                    <i className="fas fa-shopping-basket normal-text"></i>
+                    {
+                    cart.length > 0 && 
+                    <span>
+                    {cart.length}
+                    </span>
+                    }
                    </div>
                    <div className="profile">
                    <i className="fas fa-user-circle normal-text"></i>
