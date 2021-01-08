@@ -1,7 +1,7 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 
-export default function SubMenuItems({data,status,title,dispatch}) {
+export default function SubMenuItems({data,status,title,dispatch,cart}) {
 
     
     const container = {
@@ -53,9 +53,17 @@ export default function SubMenuItems({data,status,title,dispatch}) {
                          <p>by {chef}</p>
                          <h2><i className="fas fa-rupee-sign"></i> {price}</h2>
                      </div>
+                     {
+                    cart.includes(id) ?
+                    <div className="add-to-cart" onClick={()=>dispatch({type:"REMOVE",payload:id})}>
+                    <button className="red-button">Remove from Cart</button>
+                     </div>
+                     :
                      <div className="add-to-cart" onClick={()=>dispatch({type:"ADD",payload:id})}>
                          <button className="red-button">Add to Cart</button>
                      </div>
+                     }
+                     
                  </motion.div>  
                ))
             } 

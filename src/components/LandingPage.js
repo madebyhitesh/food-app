@@ -1,11 +1,9 @@
-import React, { useState } from 'react'
+import React from 'react'
 import {motion} from "framer-motion"
 import landingImage from "../assets/landing.svg"
-import Overlay from "./Overlay"
+import Homepage from './Homepage'
 
-export default function LandingPage({theme,setTheme,cart}) {
-
-    const [isOpen,setIsOpen] = useState(false);
+export default function LandingPage({cart,dispatch}) {
 
     const variants = {
         hidden: { x: "100%" },
@@ -13,54 +11,8 @@ export default function LandingPage({theme,setTheme,cart}) {
       }
 
     return (
+    <>
        <div className="landing-page">
-           <header>
-               <div className="menu-icon normal-text" onClick={()=>setIsOpen(true)}> 
-                <h2>
-                <i className="fas fa-bars"></i>
-               </h2>
-               </div>
-               <div className="logo title-text">
-                <h2 className="green-text">
-                  FoodExpress
-                </h2> 
-               </div>
-
-               <motion.div className="nav-links" animate={{x:isOpen && window.innerWidth<500 ? 200 : 0}} >
-                   <ul>
-                       <li className="navlink  active">
-                        Home
-                       </li>
-                       <li className="navlink">
-                        Offers
-                       </li>
-                       <li className="navlink">
-                        My Orders
-                       </li>
-                       <li className="navlink">
-                        Contact
-                       </li>
-                       <li className="theme-button" onClick={()=>setTheme(!theme)}>
-                            {theme ? <i className="fas fa-sun"></i> : <i className="fas fa-moon"></i>} Theme
-                       </li>
-                   </ul>
-               </motion.div>
-
-               <div className="nav-icons">
-                   <div className="cart">
-                   <i className="fas fa-shopping-basket normal-text"></i>
-                    {
-                    cart.length > 0 && 
-                    <span>
-                    {cart.length}
-                    </span>
-                    }
-                   </div>
-                   <div className="profile">
-                   <i className="fas fa-user-circle normal-text"></i>
-                   </div>
-               </div>
-           </header>
            <div className="content-wrapper">
             <div className="text-container">
            <div className="heading-title">
@@ -96,9 +48,6 @@ export default function LandingPage({theme,setTheme,cart}) {
                </form>
            </div>
 
-           {/* <footer>
-               <p className="light-text">Skip for now</p>
-           </footer> */}
            </div>
            <div className="image-wrapper second">
            <motion.div className="image-container"
@@ -111,8 +60,8 @@ export default function LandingPage({theme,setTheme,cart}) {
            </motion.div>
            </div>
            </div>
-
-        {isOpen && <Overlay onClick={e=>setIsOpen(false)} />}
-       </div>
+        </div>
+        <Homepage dispatch={dispatch} cart={cart}/>
+       </>
     )
 }

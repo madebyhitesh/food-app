@@ -1,7 +1,8 @@
 import React,{useState,useEffect,useReducer} from "react"
+import {BrowserRouter as Router,Route,Switch} from "react-router-dom"
 import Footer from "./components/Footer"
-import Homepage from "./components/Homepage"
 import LandingPage from "./components/LandingPage"
+import Nav from "./components/Nav"
 import './sass/App.css'
 
 const initialState = {cart: []};
@@ -11,7 +12,9 @@ const reducer = (state, action) => {
     case 'ADD':
       return {cart:[action.payload,...state.cart]};
     case 'REMOVE':
-      return {cart: state.cart.filter(item => item === action.payload)};
+      return {cart: state.cart.filter(item => item !== action.payload)};
+    case "COPY":
+      return {cart:[...action.payload]};
     default:
       throw new Error();
   }
@@ -25,14 +28,14 @@ function App() {
   //reducer for the cart
   const [state,dispatch] =  useReducer(reducer,initialState);
 
-  console.log("cart",state)
-
 
   useEffect(() => {
+
     setLoading(false);
+
+    //setting default value of theme when user opens the sight for first time
     if(localStorage.getItem("theme")){
       const currentTheme =  localStorage.getItem("theme")
-
       if(currentTheme === 'light')
       setTheme(false)
       else
@@ -42,6 +45,11 @@ function App() {
       localStorage.setItem("theme","light")
     }
 
+    //setting the cart for the first time;
+    if(localStorage.getItem("cart")){
+      const currentCart = JSON.parse(localStorage.getItem("cart"));
+      dispatch({type:"COPY",payload:currentCart})
+    }
   }, [])
 
   useEffect(() => {
@@ -51,6 +59,11 @@ function App() {
     localStorage.setItem("theme","light")
   }, [theme])
 
+
+  useEffect(()=>{
+    localStorage.setItem("cart",JSON.stringify(state.cart))
+  },[state.cart])
+
   return (
     <>
     {
@@ -58,9 +71,21 @@ function App() {
       <div className="loader"><h1>Loading...</h1></div>
       :
       <div className={theme ? 'App dark-mode' : 'App'} >
-        <LandingPage setTheme={setTheme} theme={theme} cart={state.cart}/>
-        <Homepage dispatch={dispatch}/>
-        <Footer/>
+
+      <Router>
+          <Nav setTheme={setTheme} theme={theme} cart={state.cart}/>
+          <Switch>
+
+            <Route path="/" exact >
+            <LandingPage setTheme={setTheme} theme={theme} cart={state.cart} dispatch={dispatch}/>
+            </Route>
+
+          </Switch>
+          <Footer/>
+        </Router>
+
+        
+       
     </div>
     }
     </>

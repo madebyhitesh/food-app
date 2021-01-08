@@ -1,41 +1,21 @@
 import React,{useEffect,useContext,useState} from 'react'
 import DataContext from '../DataContext'
-import {useInView} from "react-intersection-observer"
-import { motion,useAnimation} from "framer-motion";
+import { motion} from "framer-motion";
 import Delivery from "../assets/delivery.svg"
 import useFirestore from "../firebase/useFirestore"
 import SubMenuItems from "./SubMenuItems"
 
-export default function Homepage({dispatch}) {
+export default function Homepage({dispatch,cart}) {
 
-    const animation =  useAnimation()
-    const [ref, inView] = useInView({ threshold: 0 });
     const [isMenuOpen,setIsMenuOpen] = useState(false)
     const [currentCategory,setCurrentCategory] =  useState("")
     const [currentMenuItem,setCurrentMenuItem] =  useState([])
-    const [popularItemsData,setPopularItemsData] = useState([])
     const [popularItems] = useState(["4MVcMDuBk9UHE1gKmPYP","T2kJy9BXRG9SHTrvndfs","fE2A2ZC9fhZRRf89iq0R","CBzonQXWX8a5A7w2vhWn"]);
 
 
-    const {docs} =  useFirestore("products");
+    const {docs} =  useFirestore("products"); //all the products available 
 
-    console.log(docs)
-
-    //get the data for popular items ids
-
-    useEffect(()=>{
-        let itemsData = [];
-        popularItems.forEach(async item=>{
-            const data =  docs.filter(doc=>doc.id === item);
-            if(data[0])
-            itemsData.push(data[0])
-        })
-
-        setPopularItemsData(itemsData);
-    },[popularItems])
-   
-    console.log("popitems",popularItemsData)
-
+    // selecting the current category when user click the menu card
     useEffect(()=>{
         const items = docs.filter(doc => doc.category === currentCategory)
         setCurrentMenuItem(items)
@@ -43,16 +23,7 @@ export default function Homepage({dispatch}) {
 
     const allData =  useContext(DataContext)
 
-
-    useEffect(() => {
-      if (inView) {
-        animation.start("visible");
-      } else {
-        animation.start("hidden");
-      }
-    }, [animation, inView]);
-
-    //when user click on the special menu card
+    //when user click on the special menu card it open then sub menu 
     const onMenuClick = (title) =>{
         setIsMenuOpen(true)
         setCurrentCategory(title)
@@ -119,20 +90,18 @@ export default function Homepage({dispatch}) {
 
             
                 <motion.div className="card-container" 
-                  ref={ref}
                   initial="hidden"
-                  animate={animation}
+                  animate="visible"
                   variants={container}
                 >
                 
                 {
-                popularItemsData.map(card=>(
+                docs.filter(doc=>popularItems.includes(doc.id)).map(card=>(
                         
                 <motion.div className="cart-card"
                 key={card.id}
-                ref={ref}
                 initial="hidden"
-                animate={animation}
+                animate="visible"
                 variants={container}
                 >
                 <motion.div className="hero"
@@ -144,16 +113,23 @@ export default function Homepage({dispatch}) {
                 <motion.div className="text-container" 
                 variants={item}
                 >
-                    <h3 className="normal-text">{card.name}</h3>
-                    <p className="light-text">by {card.chef}</p>
-                    <h3 className="normal-text"><i className="fas fa-rupee-sign"></i> {card.price}</h3>
+                <h3 className="normal-text">{card.name}</h3>
+                <p className="light-text">by {card.chef}</p>
+                <h3 className="normal-text"><i className="fas fa-rupee-sign"></i> {card.price}</h3>
                 </motion.div>
                 <motion.div className="cart-button" 
                 variants={item}
                 >
-                    <button className="red-button">
-                        Add to Cart
-                    </button>
+                {
+                cart.includes(card.id) ? 
+                <button className="red-button" onClick={e=>dispatch({type:"REMOVE",payload:card.id})}>
+                Remove from Cart
+                </button>
+                :
+                <button className="red-button" onClick={e=>dispatch({type:"ADD",payload:card.id})}>
+                    Add to Cart
+                </button>
+                }
                 </motion.div>
                 </motion.div>   
                 ))
@@ -178,6 +154,7 @@ export default function Homepage({dispatch}) {
                     status={setIsMenuOpen} 
                     title={currentCategory}
                     dispatch={dispatch}
+                    cart={cart}
                     />
                 }
             </div>

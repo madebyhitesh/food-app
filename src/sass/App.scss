@@ -23,6 +23,10 @@ input,button{
     outline:none;
 }
 
+a{
+    text-decoration: none;
+}
+
 .App.dark-mode{
     --normal-text:#ffffff;
     --background:rgb(14, 13, 13);
@@ -53,6 +57,7 @@ input,button{
 
 
 @import "./config";
+@import "./Nav";
 @import './landingPage';
 @import "./homepage";
 @import "./menu";

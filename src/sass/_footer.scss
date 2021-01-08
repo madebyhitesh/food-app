@@ -27,9 +27,8 @@ footer{
                 display:flex;
                 align-items:center;
                 height:2rem;
-                background-color: var(--background);
+                background-color: var(--light-background);
                 border-radius: 6px;
-                box-shadow: rgba(29, 29, 29, 0.267) 1.95px 1.95px 2.6px;
 
                 input{
                     border:none;
@@ -47,6 +46,7 @@ footer{
                     height:100%;
                     flex:.3;
                     border-radius:6px;
+                    font-weight: 600;
                 }
             }
         }
