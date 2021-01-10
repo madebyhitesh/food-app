@@ -54,12 +54,12 @@ export default function SubMenuItems({data,status,title,dispatch,cart}) {
                          <h2><i className="fas fa-rupee-sign"></i> {price}</h2>
                      </div>
                      {
-                    cart.includes(id) ?
+                    cart.find(item=>item.item_id===id) ?
                     <div className="add-to-cart" onClick={()=>dispatch({type:"REMOVE",payload:id})}>
                     <button className="red-button">Remove from Cart</button>
                      </div>
                      :
-                     <div className="add-to-cart" onClick={()=>dispatch({type:"ADD",payload:id})}>
+                     <div className="add-to-cart" onClick={()=>dispatch({type:"ADD",payload:{item_id:id,quantity:1}})}>
                          <button className="red-button">Add to Cart</button>
                      </div>
                      }

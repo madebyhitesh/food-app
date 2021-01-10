@@ -10,9 +10,9 @@ export default function Nav({theme,setTheme,cart}) {
 
     useEffect(() => {
         setCurrentLocation(location.pathname)
+        setIsOpen(false)
     }, [location])
 
-    console.log(currentLocation)
     return (
         <header>
                <div className="menu-icon normal-text" onClick={()=>setIsOpen(true)}> 
@@ -21,9 +21,11 @@ export default function Nav({theme,setTheme,cart}) {
                </h2>
                </div>
                <div className="logo title-text">
-                <h2 className="green-text">
-                  FoodExpress
-                </h2> 
+                   <Link to="/">
+                    <h2 className="green-text">
+                    FoodExpress
+                    </h2> 
+                   </Link>
                </div>
 
                <motion.div className="nav-links" animate={{x:isOpen && window.innerWidth<500 ? 200 : 0}} >
@@ -55,15 +57,17 @@ export default function Nav({theme,setTheme,cart}) {
                </motion.div>
 
                <div className="nav-icons">
+                   <Link to="/cart">
                    <div className="cart">
                    <i className="fas fa-shopping-basket normal-text"></i>
                     {
-                    cart.length > 0 && 
-                    <span>
+                        cart.length > 0 && 
+                        <span>
                     {cart.length}
                     </span>
                     }
                    </div>
+                    </Link>
                    <div className="profile">
                    <i className="fas fa-user-circle normal-text"></i>
                    </div>

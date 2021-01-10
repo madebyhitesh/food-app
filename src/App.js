@@ -1,6 +1,6 @@
 import React,{useState,useEffect,useReducer} from "react"
 import {BrowserRouter as Router,Route,Switch} from "react-router-dom"
-import Footer from "./components/Footer"
+import Cart from "./components/Cart"
 import LandingPage from "./components/LandingPage"
 import Nav from "./components/Nav"
 import './sass/App.css'
@@ -12,9 +12,17 @@ const reducer = (state, action) => {
     case 'ADD':
       return {cart:[action.payload,...state.cart]};
     case 'REMOVE':
-      return {cart: state.cart.filter(item => item !== action.payload)};
+      return {cart: state.cart.filter(item => item.item_id !== action.payload)};
     case "COPY":
       return {cart:[...action.payload]};
+    case "SETQUANTITY":
+      const {item_id,quantity} = action.payload;
+      const item = state.cart.find(item=>item.item_id === item_id);
+      if(item)
+      item.quantity = quantity;
+      return {
+        cart : [...state.cart]
+      }
     default:
       throw new Error();
   }
@@ -27,6 +35,8 @@ function App() {
 
   //reducer for the cart
   const [state,dispatch] =  useReducer(reducer,initialState);
+
+  console.log(state.cart)
 
 
   useEffect(() => {
@@ -80,8 +90,12 @@ function App() {
             <LandingPage setTheme={setTheme} theme={theme} cart={state.cart} dispatch={dispatch}/>
             </Route>
 
+            <Route path="/cart" exact>
+              <Cart cart={state.cart} dispatch={dispatch}/>
+            </Route>
+
           </Switch>
-          <Footer/>
+
         </Router>
 
         

@@ -4,6 +4,7 @@ import { motion} from "framer-motion";
 import Delivery from "../assets/delivery.svg"
 import useFirestore from "../firebase/useFirestore"
 import SubMenuItems from "./SubMenuItems"
+import Footer from './Footer';
 
 export default function Homepage({dispatch,cart}) {
 
@@ -55,6 +56,7 @@ export default function Homepage({dispatch,cart}) {
 
 
     return (
+        <>
         <div className="home-page">
             {/* special items */}
             <div className="carousel-header">
@@ -121,12 +123,12 @@ export default function Homepage({dispatch,cart}) {
                 variants={item}
                 >
                 {
-                cart.includes(card.id) ? 
+                cart.find(item=>item.item_id===card.id) ? 
                 <button className="red-button" onClick={e=>dispatch({type:"REMOVE",payload:card.id})}>
                 Remove from Cart
                 </button>
                 :
-                <button className="red-button" onClick={e=>dispatch({type:"ADD",payload:card.id})}>
+                <button className="red-button" onClick={e=>dispatch({type:"ADD",payload:{item_id:card.id,quantity:1}})}>
                     Add to Cart
                 </button>
                 }
@@ -158,6 +160,8 @@ export default function Homepage({dispatch,cart}) {
                     />
                 }
             </div>
+            <Footer/>
+            </>
 
     )
 }
