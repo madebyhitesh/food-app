@@ -104,8 +104,8 @@
         }
         .price-description{
             position:fixed;
+            height: 30vh;
             bottom:0;
-            left:0;
             right:0;
             padding: .5rem;
             width: 100%;
@@ -118,7 +118,7 @@
                 padding: .3rem 0;
                 label{
                     color:var(--not-normal-text);
-                    font-weight: 400;
+                    font-weight: 600;
                     letter-spacing: 2px;
                     font-size:1.2rem;
                 }
@@ -131,7 +131,7 @@
 
                 p{
                     flex:1;
-                    color:var(--not-normal-text)
+                    color:var(--not-normal-light-text);
                 }
                 a{
                     color:blue;
@@ -152,15 +152,23 @@
                     text-align: right;
                 }
 
-                .place-order{
-                    height: 2rem;
+                
+            }
+            .place-order{
+                height: 2rem;
+                width: 100%;
+                display: flex;
+                align-items:center;
+                //justify-content: flex-end;
+                button{
+                    height:100%;
                     width: 100%;
-                    font-size: 1.2rem;
                     border: none;
-                   // background-color: rgb(14, 235, 113);
-                    background-color: var(--green-color);
+                    background-color: rgb(14, 235, 113);
+                    font-size: 1.2rem;
+                    padding:.3rem;
+                    border-radius: 6px;
                 }
-
             }
         }
     }

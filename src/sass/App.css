@@ -789,8 +789,8 @@ header .nav-icons .cart span {
 
 .cart-page main .price-description {
   position: fixed;
+  height: 30vh;
   bottom: 0;
-  left: 0;
   right: 0;
   padding: .5rem;
   width: 100%;
@@ -806,7 +806,7 @@ header .nav-icons .cart span {
 
 .cart-page main .price-description .coupon label {
   color: var(--not-normal-text);
-  font-weight: 400;
+  font-weight: 600;
   letter-spacing: 2px;
   font-size: 1.2rem;
 }
@@ -827,7 +827,7 @@ header .nav-icons .cart span {
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
-  color: var(--not-normal-text);
+  color: var(--not-normal-light-text);
 }
 
 .cart-page main .price-description .coupon form a {
@@ -850,12 +850,89 @@ header .nav-icons .cart span {
   text-align: right;
 }
 
-.cart-page main .price-description table .place-order {
+.cart-page main .price-description .place-order {
   height: 2rem;
   width: 100%;
-  font-size: 1.2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.cart-page main .price-description .place-order button {
+  height: 100%;
+  width: 100%;
   border: none;
-  background-color: var(--green-color);
+  background-color: #0eeb71;
+  font-size: 1.2rem;
+  padding: .3rem;
+  border-radius: 6px;
+}
+
+.offers-page {
+  background-color: var(--light-background);
+  padding: .5rem 1rem;
+  min-height: 70vh;
+}
+
+.offers-page header {
+  padding: 0;
+}
+
+.offers-page .offers-container {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr;
+      grid-template-columns: 1fr;
+}
+
+.offers-page .offers-container .card {
+  background-color: var(--background);
+  border-radius: 6px;
+  margin: .5rem 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: .4rem;
+}
+
+.offers-page .offers-container .card .description {
+  -webkit-box-flex: .8;
+      -ms-flex: .8;
+          flex: .8;
+  padding-right: .3rem;
+}
+
+.offers-page .offers-container .card .description h2 {
+  letter-spacing: 4px;
+}
+
+.offers-page .offers-container .card .description p {
+  margin-top: .3rem;
+}
+
+.offers-page .offers-container .card .apply-promo {
+  -webkit-box-flex: .2;
+      -ms-flex: .2;
+          flex: .2;
+  background-color: var(--red-color);
+  border-radius: 6px;
+  justify-self: flex-end;
+}
+
+.offers-page .offers-container .card .apply-promo button {
+  background-color: transparent;
+  height: 100%;
+  width: 100%;
+  border: none;
+  font-weight: 400;
+  color: var(--not-normal-text);
+  padding: .4rem;
 }
 
 footer {
@@ -947,7 +1024,7 @@ footer .bottom-section .contact {
   margin-top: .5rem;
 }
 
-@media all and (min-width: 500px) {
+@media all and (min-width: 600px) {
   header .menu-icon {
     display: none;
   }
@@ -973,6 +1050,7 @@ footer .bottom-section .contact {
   }
   header .nav-links ul li {
     cursor: pointer;
+    margin: 0;
   }
   header .nav-links ul .navlink {
     margin: 0 1rem;
@@ -1133,6 +1211,45 @@ footer .bottom-section .contact {
     -webkit-box-align: end;
         -ms-flex-align: end;
             align-items: flex-end;
+  }
+  .cart-page main {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+  }
+  .cart-page main .products {
+    -webkit-box-flex: .6;
+        -ms-flex: .6;
+            flex: .6;
+    overflow: visible;
+  }
+  .cart-page main .price-description {
+    color: var(--normal-text);
+    width: 35%;
+    top: 50%;
+    right: 1%;
+    -webkit-transform: translate(0, -50%);
+            transform: translate(0, -50%);
+    border-radius: 10px;
+    height: 15rem;
+  }
+  .offers-page .offers-container {
+    -ms-grid-columns: 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr;
+    gap: 0 1rem;
+  }
+  .offers-page .offers-container .card {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    text-align: center;
+    padding: .5rem .4rem;
+  }
+  .offers-page .offers-container .card .apply-promo {
+    margin-top: 1rem;
+    height: 2rem;
   }
 }
 /*# sourceMappingURL=App.css.map */

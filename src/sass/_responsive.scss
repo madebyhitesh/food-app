@@ -1,4 +1,4 @@
-@media all and (min-width:500px){
+@media all and (min-width:600px){
     //nav bar
     header{
         .menu-icon{
@@ -17,6 +17,7 @@
                 padding: 0;
                 li{
                     cursor: pointer;
+                    margin:0;
                 }
                 .navlink{
                     margin: 0 1rem;
@@ -74,7 +75,7 @@
         }
     }
 
-
+    //home page
     .home-page{
         .cart-card{
         grid-template-columns: auto auto;
@@ -98,7 +99,7 @@
         }
     }
 
-
+    //menu page
     .menu-page{
 
         .items-container{
@@ -106,7 +107,7 @@
         }
     }
 
-
+// footer
     footer{
 
         .top-section{
@@ -155,6 +156,48 @@
                 display:flex;
                 flex-direction:column;
                 align-items: flex-end;
+            }
+        }
+    }
+
+    // cart page
+    .cart-page{
+        main{
+            flex-direction: row;
+
+            .products{
+                flex:.6;
+                overflow:visible;
+            }
+
+            .price-description{
+                color:var(--normal-text);
+                width: 35%;
+                top:50%;
+                //bottom: 50%;
+                right:1%;
+                transform: translate(0,-50%);
+                border-radius: 10px;
+                height: 15rem;
+            }
+        }
+    }
+
+    //offers page
+    .offers-page{
+        .offers-container{
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 0 1rem;
+            .card{
+              flex-direction: column;  
+              text-align: center;
+              padding: .5rem .4rem;
+
+              .apply-promo{
+                margin-top: 1rem;
+                height: 2rem;
+              }
+              
             }
         }
     }

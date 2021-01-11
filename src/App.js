@@ -3,26 +3,47 @@ import {BrowserRouter as Router,Route,Switch} from "react-router-dom"
 import Cart from "./components/Cart"
 import LandingPage from "./components/LandingPage"
 import Nav from "./components/Nav"
+import Offers from "./components/Offers"
 import './sass/App.css'
 
-const initialState = {cart: []};
+const initialState = {cart: [],promo : {}};
 
 const reducer = (state, action) => {
   switch (action.type) {
     case 'ADD':
-      return {cart:[action.payload,...state.cart]};
+      return {
+        ...state,
+        cart:[action.payload,...state.cart]
+      };
     case 'REMOVE':
-      return {cart: state.cart.filter(item => item.item_id !== action.payload)};
+      return {
+        ...state,
+        cart: state.cart.filter(item => item.item_id !== action.payload)
+      };
     case "COPY":
-      return {cart:[...action.payload]};
+      return {
+        ...state,
+        cart:[...action.payload]
+      };
     case "SETQUANTITY":
       const {item_id,quantity} = action.payload;
       const item = state.cart.find(item=>item.item_id === item_id);
       if(item)
       item.quantity = quantity;
       return {
+        ...state,
         cart : [...state.cart]
       }
+     case "ADDPROMO" :
+       return{
+         ...state,
+         promo : {...action.payload}
+       }
+     case "REMOVEPROMO" :
+       return{
+         ...state,
+         promo : {}
+       }
     default:
       throw new Error();
   }
@@ -36,7 +57,7 @@ function App() {
   //reducer for the cart
   const [state,dispatch] =  useReducer(reducer,initialState);
 
-  console.log(state.cart)
+  console.log(state);
 
 
   useEffect(() => {
@@ -91,7 +112,11 @@ function App() {
             </Route>
 
             <Route path="/cart" exact>
-              <Cart cart={state.cart} dispatch={dispatch}/>
+              <Cart cart={state.cart} promo={state.promo} dispatch={dispatch}/>
+            </Route>
+
+            <Route to="/offers">
+              <Offers dispatch={dispatch} currentOffer={state.promo}/>
             </Route>
 
           </Switch>

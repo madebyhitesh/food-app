@@ -1,14 +1,18 @@
 import React,{useState,useEffect} from 'react'
 import {Link} from "react-router-dom"
 import useFirestore from '../firebase/useFirestore'
+import Footer from "./Footer"
 
-export default function Cart({cart,dispatch}) {
+export default function Cart({cart,dispatch,promo}) {
 
     const [loading,setLoading] = useState(false);
-    const {docs} =  useFirestore();
+    const {docs} =  useFirestore("products");
     const [currentCartData,setCurrentCartData] =  useState([]);
     const [itemtotal,setItemTotal] =  useState(0);
-    const [coupon,setCoupon] = useState(50);
+    const [coupon,setCoupon] = useState(null);
+    const [grossPay,setGrossPay] =  useState(0)
+    //getting width of the device user using
+    const width =  window.innerWidth;
     
     const cartItems = ()=>{
         const myArrayFiltered = docs.filter(array => cart.some(filter => filter.item_id === array.id));
@@ -38,6 +42,10 @@ export default function Cart({cart,dispatch}) {
         }
     }, [currentCartData])
 
+    useEffect(() => {
+     couponValue()
+    }, [promo,itemtotal])
+
 
     //total price of items without the coupon
     const itemTotal  = () =>{
@@ -45,12 +53,36 @@ export default function Cart({cart,dispatch}) {
         currentCartData.forEach(({id,price})=>{
             sum =  sum + parseInt(price*getQuantity(id));
         })
-        console.log("sum",sum)
         setItemTotal(sum);
+    }
+
+    //setting the final price 
+    const grandTotal = ()=>{
+        let finalPrice;
+        const {value,isPercentage} =  promo;
+        if(isPercentage)
+        finalPrice = itemtotal - (itemtotal*(value/100));
+        else
+        finalPrice = itemtotal - value;
+           
+        setGrossPay(finalPrice)
+    }
+
+    //setting the coupon value
+    const couponValue = ()=>{
+        let coupon;
+        const {value,isPercentage} =  promo;
+        if(isPercentage)
+        coupon =  itemtotal*(value/100)
+        else
+        coupon = value;
+
+        setCoupon(coupon)
     }
 
   
     return (
+        <>
         <div className="cart-page">
             <header>
                 <h3>Your favourite food is just few clicks away</h3>
@@ -124,9 +156,15 @@ export default function Cart({cart,dispatch}) {
             <div className="coupon">
                 <label htmlFor="coupoun">Offers</label>
                 <form>
-                {/* <input type="text" nane="coupoun" id="coupoun" placeholder="Enter your promo code"/>
-                <button className="green-button">Add</button> */}
-                <p>Select a promo code</p>
+                {promo ? 
+                <p>
+                Promo selected : <b>{promo.code}</b>
+                </p>
+                : 
+                <p>
+                Select the promo
+                </p>
+                }
                 <Link to="/offers">View</Link>
                 </form>
             </div>
@@ -166,24 +204,25 @@ export default function Cart({cart,dispatch}) {
                         </td>
                     <td>
                         <b>
-                        &#x20B9; {coupon ? itemtotal - coupon : itemtotal }
+                        &#x20B9; { coupon ? itemtotal - coupon : itemtotal}
                         </b>
-                    </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                        </td>
-                    <td>
-                        <button className="place-order">
-                            Place Order
-                        </button>
                     </td>
                     </tr>
                 </tbody>
             </table>
+            <div className="place-order">
+                <button>
+                    Place Order
+                </button>
+            </div>
             </section>
             </main>
         </div>
+        {
+            width > 600 && <Footer/>
+        }
+
+        </>
+        
     )
 }

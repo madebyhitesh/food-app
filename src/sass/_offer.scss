@@ -1,0 +1,54 @@
+.offers-page{
+    background-color: var(--light-background);
+    padding:.5rem 1rem;
+    min-height: 70vh;
+    header{
+        padding: 0;
+    }
+    .offers-container{
+        //padding: 1rem 0;
+        display:grid;
+        grid-template-columns: 1fr;
+
+        .card{
+            background-color:var(--background);
+            border-radius: 6px;
+            margin:.5rem 0;
+
+            display:flex;
+            align-items:center;
+            padding: .4rem;
+
+            .description{
+            flex:.8;
+            padding-right: .3rem;
+
+            h2{
+                letter-spacing: 4px;
+            }
+
+            p{
+                margin-top: .3rem;
+            }
+            }
+
+            .apply-promo{
+                flex:.2;
+                background-color: var(--red-color);
+                border-radius: 6px;
+                justify-self: flex-end;
+                //border: 2px dashed var(--normal-text);
+                button{
+                    background-color: transparent;
+                    height: 100%;
+                    width: 100%;
+                    border:none;
+                    font-weight: 400;
+                    color:var(--not-normal-text);
+                    padding:.4rem;
+                }
+            }
+            
+        }
+    }
+}
