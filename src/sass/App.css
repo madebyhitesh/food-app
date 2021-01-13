@@ -641,7 +641,14 @@ header .nav-icons .cart span {
 
 .cart-page {
   background-color: var(--light-background);
-  min-height: 80vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  min-height: 92vh;
 }
 
 .cart-page header {
@@ -668,12 +675,17 @@ header .nav-icons .cart span {
       -ms-flex-direction: column;
           flex-direction: column;
   margin-top: 1rem;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
 }
 
 .cart-page main .products {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
   width: 100%;
   padding: 0 1rem;
-  height: 50vh;
   overflow: auto;
 }
 
@@ -788,10 +800,6 @@ header .nav-icons .cart span {
 }
 
 .cart-page main .price-description {
-  position: fixed;
-  height: 30vh;
-  bottom: 0;
-  right: 0;
   padding: .5rem;
   width: 100%;
   background-color: var(--red-color);
@@ -1212,6 +1220,9 @@ footer .bottom-section .contact {
         -ms-flex-align: end;
             align-items: flex-end;
   }
+  .cart-page {
+    min-height: 70vh;
+  }
   .cart-page main {
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
@@ -1219,12 +1230,18 @@ footer .bottom-section .contact {
             flex-direction: row;
   }
   .cart-page main .products {
+    height: 60vh;
+    overflow-y: auto;
     -webkit-box-flex: .6;
         -ms-flex: .6;
             flex: .6;
-    overflow: visible;
+    scrollbar-width: none;
+  }
+  .cart-page main .products::-webkit-scrollbar {
+    display: none;
   }
   .cart-page main .price-description {
+    position: fixed;
     color: var(--normal-text);
     width: 35%;
     top: 50%;

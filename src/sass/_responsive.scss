@@ -162,15 +162,23 @@
 
     // cart page
     .cart-page{
+        min-height: 70vh;
         main{
             flex-direction: row;
 
             .products{
+                height: 60vh;
+                overflow-y: auto;
                 flex:.6;
-                overflow:visible;
+                scrollbar-width: none;
+                //overflow:visible;
+                &::-webkit-scrollbar {
+                    display: none;
+                  }
             }
 
             .price-description{
+                position: fixed;
                 color:var(--normal-text);
                 width: 35%;
                 top:50%;

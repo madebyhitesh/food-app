@@ -85,12 +85,16 @@ export default function Cart({cart,dispatch,promo}) {
         <>
         <div className="cart-page">
             <header>
-                <h3>Your favourite food is just few clicks away</h3>
+                <h3>{!loading ? "Your favourite food is just few clicks away" : "Looks like your cart is empty"}</h3>
             </header>
             <main>
             {
                 loading ? 
-                <span>Loading.....</span> :
+                <>
+                <header className="add-more-items">
+                <Link to="/">Add items</Link>
+                </header>
+                </> :
 
             <section className="products">
             {

@@ -1,7 +1,9 @@
 .cart-page{
     background-color:var(--light-background);
     //padding:0 1rem;
-    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    min-height: 92vh;
     header{
         display: flex;
         align-items: center;
@@ -13,14 +15,18 @@
 
     }
     main{
+        //background-color: blue;
         display:flex;
         flex-direction: column;
+        // justify-content: space-between;
+        // align-items: space-between;
         margin-top: 1rem;
+        flex:1;
 
         .products{
+            flex:1;
             width:100%;
             padding:0 1rem;
-            height: 50vh;
             overflow: auto;
             .card{
 
@@ -103,10 +109,10 @@
             }
         }
         .price-description{
-            position:fixed;
-            height: 30vh;
-            bottom:0;
-            right:0;
+            //position:fixed;
+            // height: 30vh;
+            // bottom:0;
+            // right:0;
             padding: .5rem;
             width: 100%;
             background-color: var(--red-color);

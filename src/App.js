@@ -115,7 +115,7 @@ function App() {
               <Cart cart={state.cart} promo={state.promo} dispatch={dispatch}/>
             </Route>
 
-            <Route to="/offers">
+            <Route path="/offers" exact>
               <Offers dispatch={dispatch} currentOffer={state.promo}/>
             </Route>
 
