@@ -11,7 +11,7 @@ export default function Homepage({dispatch,cart}) {
     const [isMenuOpen,setIsMenuOpen] = useState(false)
     const [currentCategory,setCurrentCategory] =  useState("")
     const [currentMenuItem,setCurrentMenuItem] =  useState([])
-    const [popularItems] = useState(["4MVcMDuBk9UHE1gKmPYP","T2kJy9BXRG9SHTrvndfs","fE2A2ZC9fhZRRf89iq0R","CBzonQXWX8a5A7w2vhWn"]);
+    const [popularItems] = useState(["4MVcMDuBk9UHE1gKmPYP","T2kJy9BXRG9SHTrvndfs","fE2A2ZC9fhZRRf89iq0R","CBzonQXWX8a5A7w2vhWn","x9mRKsRTeywXXA6KtehA"]);
 
 
     const {docs} =  useFirestore("products"); //all the products available 

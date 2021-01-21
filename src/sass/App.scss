@@ -1,3 +1,4 @@
+
 *,*:before,*:after{
     margin:0;
     padding:0;
@@ -24,6 +25,10 @@ body{
 
 input,button{
     outline:none;
+}
+
+button{
+    cursor: pointer;
 }
 
 a{
@@ -90,10 +95,15 @@ span.square{
     justify-content:center; 
 }
 
+.error{
+    color:var(--red-color)
+}
+
 
 @import "./config";
 @import "./nav";
 @import './landingPage';
+@import "./form";
 @import "./homepage";
 @import "./menu";
 @import "./cart"; 

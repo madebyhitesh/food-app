@@ -1,14 +1,24 @@
-import React from 'react'
+import React,{useState} from 'react'
 import {motion} from "framer-motion"
 import landingImage from "../assets/landing.svg"
 import Homepage from './Homepage'
+import Signup from './Signup'
 
 export default function LandingPage({cart,dispatch}) {
+
+    const [isFormOpen,setFormOpen] =  useState(false)
+    const [isSignUp,setIsSignUp] =  useState(true);
 
     const variants = {
         hidden: { x: "100%" },
         visible: { x: 0},
       }
+
+    //handling opening and closing of signup modals
+    const handleFormModel =  (type)=>{
+        setFormOpen(!isFormOpen);
+        setIsSignUp(type)
+    }
 
     return (
     <>
@@ -24,10 +34,10 @@ export default function LandingPage({cart,dispatch}) {
                <p className="light-text">It is a long established fact that a reader will be distracted by the readable content of page when looking at the layout.</p>
            </div>
            <div className="call-to-action">
-               <button className="btn green-button">
+               <button className="btn green-button" onClick={()=>handleFormModel(true)}>
                 Sign Up
                </button>
-               <button className="btn transparent-button">
+               <button className="btn transparent-button" onClick={()=>handleFormModel(false)}>
                 Log In
                </button>
            </div>
@@ -62,6 +72,7 @@ export default function LandingPage({cart,dispatch}) {
            </div>
         </div>
         <Homepage dispatch={dispatch} cart={cart}/>
+        {isFormOpen && <Signup status={setFormOpen} formtype={isSignUp}/>}
        </>
     )
 }

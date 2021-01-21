@@ -10,7 +10,6 @@ export default function Cart({cart,dispatch,promo}) {
     const [currentCartData,setCurrentCartData] =  useState([]);
     const [itemtotal,setItemTotal] =  useState(0);
     const [coupon,setCoupon] = useState(null);
-    const [grossPay,setGrossPay] =  useState(0)
     //getting width of the device user using
     const width =  window.innerWidth;
     
@@ -56,17 +55,6 @@ export default function Cart({cart,dispatch,promo}) {
         setItemTotal(sum);
     }
 
-    //setting the final price 
-    const grandTotal = ()=>{
-        let finalPrice;
-        const {value,isPercentage} =  promo;
-        if(isPercentage)
-        finalPrice = itemtotal - (itemtotal*(value/100));
-        else
-        finalPrice = itemtotal - value;
-           
-        setGrossPay(finalPrice)
-    }
 
     //setting the coupon value
     const couponValue = ()=>{
@@ -85,7 +73,7 @@ export default function Cart({cart,dispatch,promo}) {
         <>
         <div className="cart-page">
             <header>
-                <h3>{!loading ? "Your favourite food is just few clicks away" : "Looks like your cart is empty"}</h3>
+                <h2 className="normal-text">{!loading ? "Your favourite food is just few clicks away" : "Looks like your cart is empty"}</h2>
             </header>
             <main>
             {

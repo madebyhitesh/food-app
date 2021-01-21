@@ -7,10 +7,10 @@ export default function Offers({dispatch,currentOffer}) {
     return (
         <>
         <div className="offers-page">
-            <header className="green-text">
-                <h1>
+            <header className="normal-text">
+                <h2>
                 Offers For You.
-                </h1>
+                </h2>
             </header>
             <div className="offers-container">
 

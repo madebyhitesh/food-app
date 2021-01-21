@@ -28,6 +28,10 @@ input, button {
   outline: none;
 }
 
+button {
+  cursor: pointer;
+}
+
 a {
   text-decoration: none;
 }
@@ -100,6 +104,10 @@ span.square.non-veg .circle {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+}
+
+.error {
+  color: var(--red-color);
 }
 
 .green-text {
@@ -357,6 +365,89 @@ header .nav-icons .cart span {
   color: var(--light-text);
 }
 
+.sign-up {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  z-index: 111111111111111111;
+  background-color: var(--background);
+  height: 500px;
+  width: 300px;
+  color: var(--normal-text);
+  padding: .4rem;
+}
+
+.sign-up header {
+  color: var(--green-color);
+  background-color: transparent;
+  width: 100%;
+  text-align: center;
+}
+
+.sign-up .cross-btn {
+  position: absolute;
+  background-color: transparent;
+  color: var(--normal-text);
+  border: none;
+  font-size: 1.4rem;
+  right: 1rem;
+  top: 1rem;
+}
+
+.sign-up .cross-btn:hover {
+  cursor: pointer;
+}
+
+.sign-up .sign-up-background {
+  display: none;
+}
+
+.sign-up .feilds-container {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.sign-up .feilds-container .feild {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-top: 1rem;
+}
+
+.sign-up .feilds-container .feild label {
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+.sign-up .feilds-container .feild input, .sign-up .feilds-container .feild button {
+  margin-top: .3rem;
+  font-size: 1.2rem;
+  padding: .4rem .2rem;
+  background-color: var(--light-background);
+  border: none;
+  border-radius: 6px;
+  color: var(--normal-text);
+}
+
+.sign-up .feilds-container .feild button {
+  background-color: var(--green-color);
+}
+
 .home-page {
   padding-top: 2rem;
   padding: 1rem;
@@ -489,6 +580,7 @@ header .nav-icons .cart span {
   padding: 1rem;
   border-radius: 6px;
   background-color: var(--background);
+  z-index: 1111111111111111;
 }
 
 .home-page .cart-card .text-container {
@@ -674,6 +766,9 @@ header .nav-icons .cart span {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   margin-top: 1rem;
   -webkit-box-flex: 1;
       -ms-flex: 1;
@@ -681,11 +776,9 @@ header .nav-icons .cart span {
 }
 
 .cart-page main .products {
-  -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
+  max-height: 50vh;
   width: 100%;
-  padding: 0 1rem;
+  padding: 0 1rem 1rem 1rem;
   overflow: auto;
 }
 
@@ -802,7 +895,7 @@ header .nav-icons .cart span {
 .cart-page main .price-description {
   padding: .5rem;
   width: 100%;
-  background-color: var(--red-color);
+  background-color: var(--background);
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
 }
@@ -813,7 +906,7 @@ header .nav-icons .cart span {
 }
 
 .cart-page main .price-description .coupon label {
-  color: var(--not-normal-text);
+  color: var(--normal-text);
   font-weight: 600;
   letter-spacing: 2px;
   font-size: 1.2rem;
@@ -829,13 +922,14 @@ header .nav-icons .cart span {
   width: 100%;
   height: 2rem;
   font-size: 1.2rem;
+  color: var(--normal-text);
 }
 
 .cart-page main .price-description .coupon form p {
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
-  color: var(--not-normal-light-text);
+  color: var(--normal-light-text);
 }
 
 .cart-page main .price-description .coupon form a {
@@ -851,7 +945,7 @@ header .nav-icons .cart span {
 .cart-page main .price-description table td {
   font-weight: 400;
   padding: .2rem 0;
-  color: var(--not-normal-text);
+  color: var(--normal-text);
 }
 
 .cart-page main .price-description table td:nth-child(2) {
@@ -877,6 +971,7 @@ header .nav-icons .cart span {
   font-size: 1.2rem;
   padding: .3rem;
   border-radius: 6px;
+  cursor: pointer;
 }
 
 .offers-page {
@@ -1033,6 +1128,9 @@ footer .bottom-section .contact {
 }
 
 @media all and (min-width: 600px) {
+  .overlay {
+    z-index: 111111111111;
+  }
   header .menu-icon {
     display: none;
   }
@@ -1145,9 +1243,9 @@ footer .bottom-section .contact {
     -webkit-box-align: center;
         -ms-flex-align: center;
             align-items: center;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
+    -webkit-box-pack: end;
+        -ms-flex-pack: end;
+            justify-content: flex-end;
   }
   .menu-page .items-container {
     -ms-grid-columns: 1fr 1fr 1fr 1fr;
@@ -1221,16 +1319,20 @@ footer .bottom-section .contact {
             align-items: flex-end;
   }
   .cart-page {
-    min-height: 70vh;
+    min-height: 60vh;
   }
   .cart-page main {
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
         -ms-flex-direction: row;
             flex-direction: row;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+    height: 100%;
   }
   .cart-page main .products {
-    height: 60vh;
+    height: 100%;
+    max-height: 100%;
     overflow-y: auto;
     -webkit-box-flex: .6;
         -ms-flex: .6;
@@ -1241,15 +1343,15 @@ footer .bottom-section .contact {
     display: none;
   }
   .cart-page main .price-description {
-    position: fixed;
+    width: 50%;
+    padding: 0 1.4rem;
+    -webkit-box-flex: .38;
+        -ms-flex: .38;
+            flex: .38;
     color: var(--normal-text);
-    width: 35%;
-    top: 50%;
-    right: 1%;
-    -webkit-transform: translate(0, -50%);
-            transform: translate(0, -50%);
     border-radius: 10px;
     height: 15rem;
+    margin: 0 auto;
   }
   .offers-page .offers-container {
     -ms-grid-columns: 1fr 1fr 1fr;
@@ -1267,6 +1369,40 @@ footer .bottom-section .contact {
   .offers-page .offers-container .card .apply-promo {
     margin-top: 1rem;
     height: 2rem;
+  }
+  .sign-up {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+    height: 450px;
+    width: 750px;
+    border-radius: 10px;
+  }
+  .sign-up .sign-up-background {
+    display: block;
+    height: 100%;
+    -webkit-box-flex: .6;
+        -ms-flex: .6;
+            flex: .6;
+  }
+  .sign-up .sign-up-background img {
+    height: 100%;
+    width: 100%;
+  }
+}
+
+@media all and (min-width: 1300px) {
+  body {
+    background-color: var(--light-background);
+  }
+  .App {
+    width: 80%;
+    margin: 0 auto;
   }
 }
 /*# sourceMappingURL=App.css.map */

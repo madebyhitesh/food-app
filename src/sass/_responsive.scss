@@ -1,4 +1,10 @@
 @media all and (min-width:600px){
+
+    //global style changes
+    .overlay{
+    z-index:111111111111;
+    }
+
     //nav bar
     header{
         .menu-icon{
@@ -44,7 +50,6 @@
 
     //landing page queries
     .landing-page{
-       // min-height: 300px;
        padding: .5rem 1rem;
         .content-wrapper{
             width: 100%;
@@ -53,14 +58,9 @@
             justify-content: space-between;
             &>div{
                 flex:1;
-                //background-color:black;
             }
             .image-wrapper.second{
                 display: flex;
-                // .image-container{
-                //     height:22rem;
-                //     width: 22rem;
-                // }
             }
             .image-wrapper.first{
                 display: none;
@@ -94,7 +94,7 @@
                 flex:.4;
                 display: flex;
                 align-items:center;
-                justify-content:center;
+                justify-content:flex-end;
             }
         }
     }
@@ -162,12 +162,17 @@
 
     // cart page
     .cart-page{
-        min-height: 70vh;
+        min-height: 60vh;
         main{
             flex-direction: row;
-
+           // align-items: center;
+            justify-content: space-around;
+            //background-color: black;
+            height: 100%;
             .products{
-                height: 60vh;
+                //min-height: 60vh;
+                height: 100%;
+                max-height: 100%;
                 overflow-y: auto;
                 flex:.6;
                 scrollbar-width: none;
@@ -178,15 +183,14 @@
             }
 
             .price-description{
-                position: fixed;
+                //position: fixed;
+                width: 50%;
+                padding: 0 1.4rem;
+                flex:.38;
                 color:var(--normal-text);
-                width: 35%;
-                top:50%;
-                //bottom: 50%;
-                right:1%;
-                transform: translate(0,-50%);
                 border-radius: 10px;
                 height: 15rem;
+                margin:0 auto;
             }
         }
     }
@@ -208,6 +212,39 @@
               
             }
         }
+    }
+
+    //forms
+    .sign-up{
+        display: flex;
+        align-items:center;
+        justify-content:space-around;
+        height: 450px;
+        width: 750px;
+        border-radius: 10px;
+        .sign-up-background{
+            display: block;
+           // background-color: gainsboro;
+            height: 100%;
+            flex:.6;
+            img{
+                height: 100%;
+                width: 100%;
+            }
+        }
+    }
+}
+
+
+// large screens 
+
+@media all and (min-width:1300px){
+    body{
+        background-color: var(--light-background);
+    }
+    .App{
+        width: 80%;
+        margin:0 auto;
     }
 }
 
