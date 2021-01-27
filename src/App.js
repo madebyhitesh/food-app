@@ -1,4 +1,5 @@
 import React,{useState,useEffect,useReducer} from "react"
+import firebase from 'firebase'
 import {BrowserRouter as Router,Route,Switch} from "react-router-dom"
 import Cart from "./components/Cart"
 import LandingPage from "./components/LandingPage"
@@ -6,7 +7,7 @@ import Nav from "./components/Nav"
 import Offers from "./components/Offers"
 import './sass/App.css'
 
-const initialState = {cart: [],promo : {}};
+const initialState = {cart: [],promo : {},user:false};
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -44,6 +45,12 @@ const reducer = (state, action) => {
          ...state,
          promo : {}
        }
+      case "SETUSER" :
+        return {
+          ...state,
+          user: action.payload
+        }
+      
     default:
       throw new Error();
   }
@@ -58,11 +65,28 @@ function App() {
   const [state,dispatch] =  useReducer(reducer,initialState);
 
   console.log(state);
+  //checking the current user state
+  function currentUserState (){
+      firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        // User is signed in, see docs for a list of available properties
+        dispatch({type:"SETUSER", payload: user.email})
+        // ...
+      } else {
+        // User is signed out
+        console.log("user has signed out")
+        dispatch({type:"SETUSER", payload: false})
+
+      }
+    });
+
+  }
 
 
   useEffect(() => {
 
     setLoading(false);
+    currentUserState()
 
     //setting default value of theme when user opens the sight for first time
     if(localStorage.getItem("theme")){
@@ -104,11 +128,11 @@ function App() {
       <div className={theme ? 'App dark-mode' : 'App'} >
 
       <Router>
-          <Nav setTheme={setTheme} theme={theme} cart={state.cart}/>
+          <Nav setTheme={setTheme} theme={theme} cart={state.cart} user={state.user}/>
           <Switch>
 
             <Route path="/" exact >
-            <LandingPage setTheme={setTheme} theme={theme} cart={state.cart} dispatch={dispatch}/>
+            <LandingPage setTheme={setTheme} theme={theme} cart={state.cart} user={state.user} dispatch={dispatch}/>
             </Route>
 
             <Route path="/cart" exact>

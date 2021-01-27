@@ -1,8 +1,9 @@
 import React,{useState,useEffect} from 'react'
 import {useLocation,Link} from 'react-router-dom'
+import firebase from 'firebase'
 import Overlay from "./Overlay"
 import {motion} from "framer-motion"
-export default function Nav({theme,setTheme,cart}) {
+export default function Nav({theme,setTheme,cart,user}) {
 
     const location =  useLocation()
     const [currentLocation,setCurrentLocation] =  useState(location.pathname)
@@ -12,6 +13,12 @@ export default function Nav({theme,setTheme,cart}) {
         setCurrentLocation(location.pathname)
         setIsOpen(false)
     }, [location])
+
+    
+    function signOut() {
+        // [START auth_sign_out]
+        firebase.auth().signOut() 
+    }
 
     return (
         <header>
@@ -69,7 +76,13 @@ export default function Nav({theme,setTheme,cart}) {
                    </div>
                     </Link>
                    <div className="profile">
-                   <i className="fas fa-user-circle normal-text"></i>
+                       {
+                           !user ?
+                           <i className="fas fa-user-circle normal-text"></i> :
+                           <button className="btn transparent-button" onClick={()=>signOut()}>
+                           Log Out
+                          </button>
+                       }
                    </div>
                </div>
                {isOpen && <Overlay onClick={e=>setIsOpen(false)} />}

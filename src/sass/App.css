@@ -267,6 +267,11 @@ header .nav-icons .cart span {
   border-radius: 50%;
 }
 
+header .nav-icons .profile button {
+  white-space: nowrap;
+  font-size: .9rem;
+}
+
 .landing-page {
   max-width: 100vw;
   padding: .5rem;
@@ -274,6 +279,7 @@ header .nav-icons .cart span {
 }
 
 .landing-page .heading-title {
+  margin-top: 1rem;
   font-size: 1.4rem;
 }
 
@@ -373,10 +379,12 @@ header .nav-icons .cart span {
           transform: translate(-50%, -50%);
   z-index: 111111111111111111;
   background-color: var(--background);
-  height: 500px;
-  width: 300px;
+  min-height: 300px;
+  width: 90%;
+  max-width: 450px;
   color: var(--normal-text);
-  padding: .4rem;
+  padding: 1rem .4rem;
+  border-radius: 10px;
 }
 
 .sign-up header {
@@ -384,6 +392,23 @@ header .nav-icons .cart span {
   background-color: transparent;
   width: 100%;
   text-align: center;
+}
+
+.sign-up .form-heading {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  text-align: center;
+}
+
+.sign-up .form-heading p {
+  width: 100%;
+  margin-top: .5rem;
 }
 
 .sign-up .cross-btn {
@@ -446,6 +471,13 @@ header .nav-icons .cart span {
 
 .sign-up .feilds-container .feild button {
   background-color: var(--green-color);
+}
+
+.sign-up .feilds-container .feild .link-btn {
+  border: none;
+  color: blue;
+  background-color: transparent;
+  font-size: 1rem;
 }
 
 .home-page {
@@ -1379,9 +1411,12 @@ footer .bottom-section .contact {
             align-items: center;
     -ms-flex-pack: distribute;
         justify-content: space-around;
-    height: 450px;
-    width: 750px;
     border-radius: 10px;
+    min-height: 400px;
+    max-width: 750px;
+  }
+  .sign-up form {
+    max-width: 40%;
   }
   .sign-up .sign-up-background {
     display: block;

@@ -5,15 +5,28 @@
     transform: translate(-50%,-50%);
     z-index: 111111111111111111;
     background-color: var(--background);
-    height: 500px;
-    width: 300px;
+    min-height: 300px;
+    width: 90%;
+    max-width: 450px;
     color:var(--normal-text);
-    padding: .4rem;
+    padding: 1rem .4rem;
+    border-radius:10px;
     header{
         color: var(--green-color);
         background-color: transparent;
         width: 100%;
         text-align: center;
+    }
+    .form-heading{
+
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        p{
+            width: 100%;
+            margin-top: .5rem;
+        }
     }
 
     .cross-btn{
@@ -29,6 +42,8 @@
         }
     }
 
+   
+
     .sign-up-background{
         display: none;
     }
@@ -38,7 +53,6 @@
         display: flex;
         justify-content: space-between;
         flex-direction: column;
-       // background-color:blue;
 
         .feild{
             display:flex;
@@ -63,6 +77,12 @@
 
             button{
                 background-color:var(--green-color);
+            }
+            .link-btn{
+                border:none;
+                color:blue;
+                background-color: transparent;
+                font-size: 1rem;
             }
         }
     }

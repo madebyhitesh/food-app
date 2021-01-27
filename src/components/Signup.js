@@ -1,20 +1,36 @@
 import React,{useState,useEffect} from 'react'
 import Background from '../assets/landing.svg'
+import firebase from "firebase"
 
-export default function Signup({status,formtype}) {
+export default function Signup({status,formtype,formtypeStatus,dispatch}) {
     const [error,setError] =  useState(false);
+    const [loading,setLoading] = useState(false);
     const [passwordError,setPasswordError] =  useState(false);
     const [errorConfirmPassword,setErrorConfirmPassword] =  useState(false);
 
     //vars to store the values of input feild
-    const [username,setUsername] =  useState('')
+    const [email,setEmail] =  useState('')
     const [password,setPassword] =  useState('')
     const [confirmPassword,setConfirmPassword] =  useState('')
 
 
     useEffect(() => {
         checkConfirmPassword()
-    }, [confirmPassword,password])
+    },[confirmPassword,password])
+
+    //on change function for the inputs
+    const handleChangeEmail = value=>{
+        setEmail(value)
+        setError(false)
+    } 
+    const handleChangePassword = value=>{
+        setPassword(value)
+        setError(false)
+    } 
+    const handleChangeConfirmPassword = value=>{
+        setConfirmPassword(value)
+        setError(false)
+    } 
 
 
     // checking if the password match with the confirm password
@@ -29,8 +45,45 @@ export default function Signup({status,formtype}) {
 
         }else
         setErrorConfirmPassword(false)
+    }
 
+    //login function
+    function login ({email,password}){
+        firebase.auth().signInWithEmailAndPassword(email, password)
+        .then((usercred) => {
+          //closing the popup
+          status(false)
+        })
+        .catch((error) => {
+          //setting the error to display the user
+          setError(error.message);
+        }
+          );
+    }
+    //handling new user sign up
+    function signup ({email,password}){
+        firebase.auth().createUserWithEmailAndPassword(email,password)
+        .then(usercred=>{
+         //closing the popup
+         status(false)
+        })
+        .catch(error=>{
+          setError(error.message);
+        })
+   }
+ 
 
+    //handling new user sign up 
+    function handleSignup (e){
+        setLoading(true)
+        e.preventDefault()
+
+        if(formtype)
+        signup({email,password})
+        else
+        login({email,password});
+
+        setLoading(false)
     }
 
     return (
@@ -40,39 +93,38 @@ export default function Signup({status,formtype}) {
             <div className="sign-up-background">
                 <img src={Background} alt="background-signup"/>
             </div>
-            <form >
+            <form onSubmit={handleSignup}>
                 <header className="form-heading">
                     <h2>
                     {
                         formtype ? "SignUp for FoodExpress" : "LogIn FoodExpress"
                     }
                     </h2>
+                    {error && <p className="error">{error}</p>}
                 </header>
 
                 <div className="feilds-container">
                     <div className="feild">
-                        <label htmlFor="username">Username</label>
-                        <input type="text" name="username" required placeholder="Enter a username"
-                        value={username}
-                        onChange={e=>setUsername(e.target.value)}
+                        <label htmlFor="username">Email</label>
+                        <input type="email" name="username" required placeholder="Enter a email"
+                        value={email}
+                        onChange={e=>handleChangeEmail(e.target.value)}
                         />
-                        {formtype && error && <span className="error">Username already exists</span>}
                     </div>
                     <div className="feild">
                         <label htmlFor="password">Password</label>
-                        <input type="text" name="password" required placeholder="Enter password"
+                        <input type="password" name="password" required placeholder="Enter password"
                          value={password}
-                         onChange={e=>setPassword(e.target.value)}
+                         onChange={e=>handleChangePassword(e.target.value)}
                         />
-                        {!formtype && passwordError && <span className="error">Inncorrect password</span>}
 
                     </div>
                     {formtype &&
                         <div className="feild">
                         <label htmlFor="confirm-password">Confirm Password</label>
-                        <input type="text" name="confirm-password" required placeholder="Confirm your password"
+                        <input type="password" name="confirm-password" required placeholder="Confirm your password"
                          value={confirmPassword}
-                         onChange={e=>setConfirmPassword(e.target.value)}
+                         onChange={e=>handleChangeConfirmPassword(e.target.value)}
                         />
                         {errorConfirmPassword && <span className="error">Password does not match</span>}
                     </div>}
@@ -81,15 +133,15 @@ export default function Signup({status,formtype}) {
                         {formtype ? 
                         <button type="submit" 
                         style={{
-                            backgroundColor: error || errorConfirmPassword && 'grey',
-                            pointerEvents: error || errorConfirmPassword && 'none',
+                            backgroundColor: (error || errorConfirmPassword || loading) && 'grey',
+                            pointerEvents: (error || errorConfirmPassword || loading) && 'none',
                             }}>
                             Sign Up
                         </button> :
                         <button type="submit" 
                         style={{
-                            backgroundColor: error || errorConfirmPassword && 'grey',
-                            pointerEvents: error || errorConfirmPassword && 'none',
+                            backgroundColor: (error || errorConfirmPassword || loading) && 'grey',
+                            pointerEvents: (error || errorConfirmPassword || loading) && 'none',
                             }}>
                             Log In
                         </button> 
@@ -97,6 +149,13 @@ export default function Signup({status,formtype}) {
                     }
 
                     </div>
+                <div className="feild form-heading">
+                {
+                    formtype ?
+                    <p>Already have an account? <button className="link-btn" onClick={()=>formtypeStatus(false)}>Log In</button></p> :
+                    <p>Don't have an account? <button className="link-btn" onClick={()=>formtypeStatus(true)}>Sign Up</button></p>
+                }
+                </div>
                 </div>
             </form>
             </div>

@@ -17,5 +17,5 @@ import "firebase/firestore"
 
   const projectStorage = firebase.storage();
   const projectFirestore =  firebase.firestore()
-
+  
   export {projectFirestore,projectStorage};

@@ -219,9 +219,12 @@
         display: flex;
         align-items:center;
         justify-content:space-around;
-        height: 450px;
-        width: 750px;
         border-radius: 10px;
+        min-height: 400px;
+        max-width: 750px;
+        form{
+            max-width: 40%;
+        }
         .sign-up-background{
             display: block;
            // background-color: gainsboro;
