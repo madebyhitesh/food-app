@@ -6,6 +6,7 @@ import LandingPage from "./components/LandingPage"
 import Nav from "./components/Nav"
 import Offers from "./components/Offers"
 import './sass/App.css'
+import MyOrders from "./components/MyOrders"
 
 const initialState = {cart: [],promo : {},user:false};
 
@@ -70,7 +71,11 @@ function App() {
       firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         // User is signed in, see docs for a list of available properties
-        dispatch({type:"SETUSER", payload: user.email})
+        const object = {
+          id:user.uid,
+          email: user.email
+        }
+        dispatch({type:"SETUSER", payload: object})
         // ...
       } else {
         // User is signed out
@@ -136,12 +141,19 @@ function App() {
             </Route>
 
             <Route path="/cart" exact>
-              <Cart cart={state.cart} promo={state.promo} dispatch={dispatch}/>
+              <Cart cart={state.cart} promo={state.promo} dispatch={dispatch} user={state.user}/>
             </Route>
 
             <Route path="/offers" exact>
               <Offers dispatch={dispatch} currentOffer={state.promo}/>
             </Route>
+
+            {
+              state.user &&
+              <Route path="/my-orders">
+                <MyOrders user={state.user}/>              
+              </Route>
+            }
 
           </Switch>
 

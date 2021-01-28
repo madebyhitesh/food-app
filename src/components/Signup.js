@@ -2,10 +2,9 @@ import React,{useState,useEffect} from 'react'
 import Background from '../assets/landing.svg'
 import firebase from "firebase"
 
-export default function Signup({status,formtype,formtypeStatus,dispatch}) {
+export default function Signup({status,formtype,formtypeStatus,dispatch,popup}) {
     const [error,setError] =  useState(false);
     const [loading,setLoading] = useState(false);
-    const [passwordError,setPasswordError] =  useState(false);
     const [errorConfirmPassword,setErrorConfirmPassword] =  useState(false);
 
     //vars to store the values of input feild
@@ -51,11 +50,15 @@ export default function Signup({status,formtype,formtypeStatus,dispatch}) {
     function login ({email,password}){
         firebase.auth().signInWithEmailAndPassword(email, password)
         .then((usercred) => {
+          setLoading(false)
+          //opening the success popup
+          popup(true)
           //closing the popup
           status(false)
         })
         .catch((error) => {
           //setting the error to display the user
+          setLoading(false)
           setError(error.message);
         }
           );
@@ -64,10 +67,14 @@ export default function Signup({status,formtype,formtypeStatus,dispatch}) {
     function signup ({email,password}){
         firebase.auth().createUserWithEmailAndPassword(email,password)
         .then(usercred=>{
+         setLoading(false)
+         //opening the success popup
+         popup(true)
          //closing the popup
          status(false)
         })
         .catch(error=>{
+          setLoading(false)
           setError(error.message);
         })
    }
@@ -83,7 +90,6 @@ export default function Signup({status,formtype,formtypeStatus,dispatch}) {
         else
         login({email,password});
 
-        setLoading(false)
     }
 
     return (
@@ -133,17 +139,17 @@ export default function Signup({status,formtype,formtypeStatus,dispatch}) {
                         {formtype ? 
                         <button type="submit" 
                         style={{
-                            backgroundColor: (error || errorConfirmPassword || loading) && 'grey',
+                            backgroundColor: (error || errorConfirmPassword ) && 'grey',
                             pointerEvents: (error || errorConfirmPassword || loading) && 'none',
                             }}>
-                            Sign Up
+                            {loading ? "registering..." : "Sign Up"}
                         </button> :
                         <button type="submit" 
                         style={{
-                            backgroundColor: (error || errorConfirmPassword || loading) && 'grey',
-                            pointerEvents: (error || errorConfirmPassword || loading) && 'none',
+                            backgroundColor: (error || errorConfirmPassword ) && 'grey',
+                            pointerEvents: (error || errorConfirmPassword || loading ) && 'none',
                             }}>
-                            Log In
+                            {loading ? "verifying..." : "Log In"}
                         </button> 
                         
                     }
@@ -159,6 +165,7 @@ export default function Signup({status,formtype,formtypeStatus,dispatch}) {
                 </div>
             </form>
             </div>
+
         </div>
     )
 }

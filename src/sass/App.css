@@ -91,7 +91,7 @@ span.square.non-veg .circle {
   left: 0;
   right: 0;
   background-color: rgba(0, 0, 0, 0.8);
-  z-index: 11111111;
+  z-index: 111111111;
 }
 
 .loader {
@@ -192,7 +192,7 @@ header .nav-links {
   left: -200px;
   bottom: 0;
   background-color: var(--red-color);
-  z-index: 111111111111;
+  z-index: 1111111111111111111111;
 }
 
 header .nav-links ul {
@@ -612,7 +612,7 @@ header .nav-icons .profile button {
   padding: 1rem;
   border-radius: 6px;
   background-color: var(--background);
-  z-index: 1111111111111111;
+  z-index: 1111111;
 }
 
 .home-page .cart-card .text-container {
@@ -1068,6 +1068,100 @@ header .nav-icons .profile button {
   font-weight: 400;
   color: var(--not-normal-text);
   padding: .4rem;
+}
+
+.popup {
+  position: fixed;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  z-index: 111111111111111111;
+  background-color: var(--background);
+  min-height: 200px;
+  width: 90%;
+  max-width: 450px;
+  color: var(--normal-text);
+  padding: 1rem .4rem;
+  border-radius: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.popup .cross-btn {
+  position: absolute;
+  background-color: transparent;
+  color: var(--normal-text);
+  border: none;
+  font-size: 1.4rem;
+  right: 1rem;
+  top: 1rem;
+}
+
+.popup .cross-btn:hover {
+  cursor: pointer;
+}
+
+.popup .icon {
+  font-size: 3.4rem;
+}
+
+.popup .icon .succes {
+  color: var(--green-color);
+}
+
+.popup .icon .danger {
+  color: var(--red-color);
+}
+
+.popup .icon .warning {
+  color: #f6fa2b;
+}
+
+.popup h2 {
+  margin-top: 1rem;
+}
+
+.popup p {
+  text-align: center;
+  margin-top: .5rem;
+}
+
+.popup .actions {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-top: 1rem;
+}
+
+.popup .actions button {
+  font-size: 1.1rem;
+  padding: .3rem 1rem;
+  border: none;
+  border-radius: 2px;
+  color: var(--not-normal-text);
+  background-color: var(--green-color);
+}
+
+.popup .actions button:nth-child(2) {
+  background: var(--red-color);
 }
 
 footer {

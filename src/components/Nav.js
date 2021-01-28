@@ -16,7 +16,7 @@ export default function Nav({theme,setTheme,cart,user}) {
 
     
     function signOut() {
-        // [START auth_sign_out]
+        // [sign out the current user]
         firebase.auth().signOut() 
     }
 
@@ -47,11 +47,16 @@ export default function Nav({theme,setTheme,cart,user}) {
                         Offers
                        </li>
                        </Link>
-                       <Link to="/my-orders">
-                       <li className={currentLocation === "/my-orders" ? "navlink  active" : "navlink"}>
+                       
+                    {   
+                    //will be showing this linking only if the user is logged in
+                    user && 
+                        <Link to="/my-orders">
+                        <li className={currentLocation === "/my-orders" ? "navlink  active" : "navlink"}>
                         My Orders
-                       </li>
-                       </Link>
+                        </li>
+                        </Link>
+                    }
                        <Link to="contact">
                        <li className={currentLocation === "/contact" ? "navlink  active" : "navlink"}>
                         Contact
@@ -77,7 +82,7 @@ export default function Nav({theme,setTheme,cart,user}) {
                     </Link>
                    <div className="profile">
                        {
-                           !user ?
+                           !user.id ?
                            <i className="fas fa-user-circle normal-text"></i> :
                            <button className="btn transparent-button" onClick={()=>signOut()}>
                            Log Out

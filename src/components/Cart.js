@@ -1,9 +1,10 @@
 import React,{useState,useEffect} from 'react'
 import {Link} from "react-router-dom"
 import useFirestore from '../firebase/useFirestore'
+import {projectFirestore} from '../firebase/config'
 import Footer from "./Footer"
 
-export default function Cart({cart,dispatch,promo}) {
+export default function Cart({cart,dispatch,promo,user}) {
 
     const [loading,setLoading] = useState(false);
     const {docs} =  useFirestore("products");
@@ -68,6 +69,26 @@ export default function Cart({cart,dispatch,promo}) {
         setCoupon(coupon)
     }
 
+    function handleSubmitOrder (e){
+        e.preventDefault()
+        if(user.id){
+            const body = {
+                user_id:user.email,
+                cart:[...cart],
+                total: coupon ? itemtotal - coupon : itemtotal
+            }
+
+            console.log(body)
+            projectFirestore.collection("orders")
+            .add(body)
+            .then(docRef=>console.log("Document written with ID: ", docRef.id))
+            .catch(err=>console.log(err))
+
+        }else{
+            alert("Login first!!!!!")
+        }
+
+    }
   
     return (
         <>
@@ -203,7 +224,7 @@ export default function Cart({cart,dispatch,promo}) {
                 </tbody>
             </table>
             <div className="place-order">
-                <button>
+                <button onClick={handleSubmitOrder}>
                     Place Order
                 </button>
             </div>
