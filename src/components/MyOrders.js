@@ -12,12 +12,12 @@ export default function MyOrders({user}) {
     useEffect(() => {
         const data = [...docs].filter(item=>item.user_id ===  user.email);
         setOrders(data)
-    }, [docs])
+    }, [docs,user.email])
 
     return (
         <div>
             My orders
-            p
+            <p>{JSON.stringify(orders)}</p>
         </div>
     )
 }

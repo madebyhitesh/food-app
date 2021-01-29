@@ -14,6 +14,19 @@ export default function Signup({status,formtype,formtypeStatus,dispatch,popup}) 
 
 
     useEffect(() => {
+    // checking if the password match with the confirm password
+    const checkConfirmPassword = ()=>{
+
+        if(password && confirmPassword){
+
+            if(password !== confirmPassword)
+            setErrorConfirmPassword(true)
+            else
+            setErrorConfirmPassword(false)
+
+        }else
+        setErrorConfirmPassword(false)
+    }
         checkConfirmPassword()
     },[confirmPassword,password])
 
@@ -31,20 +44,6 @@ export default function Signup({status,formtype,formtypeStatus,dispatch,popup}) 
         setError(false)
     } 
 
-
-    // checking if the password match with the confirm password
-    const checkConfirmPassword = ()=>{
-
-        if(password && confirmPassword){
-
-            if(password !== confirmPassword)
-            setErrorConfirmPassword(true)
-            else
-            setErrorConfirmPassword(false)
-
-        }else
-        setErrorConfirmPassword(false)
-    }
 
     //login function
     function login ({email,password}){

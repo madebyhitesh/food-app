@@ -1,16 +1,21 @@
 import React,{useState,useEffect} from 'react'
-import {Link} from "react-router-dom"
+import {Link, useHistory} from "react-router-dom"
 import useFirestore from '../firebase/useFirestore'
 import {projectFirestore} from '../firebase/config'
 import Footer from "./Footer"
+import Popup from './Popup'
 
 export default function Cart({cart,dispatch,promo,user}) {
+
+    const history =  useHistory()
 
     const [loading,setLoading] = useState(false);
     const {docs} =  useFirestore("products");
     const [currentCartData,setCurrentCartData] =  useState([]);
     const [itemtotal,setItemTotal] =  useState(0);
     const [coupon,setCoupon] = useState(null);
+    const [isPopupOpen,setIsPopupOpen] =  useState(false);
+    const [popupData,setPopupData] = useState(null);
     //getting width of the device user using
     const width =  window.innerWidth;
     
@@ -32,21 +37,10 @@ export default function Cart({cart,dispatch,promo,user}) {
     useEffect(() => {
         setLoading(true);
         setCurrentCartData(cartItems())
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [docs,cart])
 
     useEffect(() => {
-        
-        if(currentCartData.length>0){
-            setLoading(false)
-            itemTotal()
-        }
-    }, [currentCartData])
-
-    useEffect(() => {
-     couponValue()
-    }, [promo,itemtotal])
-
-
     //total price of items without the coupon
     const itemTotal  = () =>{
         let sum = 0;
@@ -55,8 +49,15 @@ export default function Cart({cart,dispatch,promo,user}) {
         })
         setItemTotal(sum);
     }
+        
+    if(currentCartData.length>0){
+        setLoading(false)
+        itemTotal()
+    }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [currentCartData])
 
-
+    useEffect(() => {
     //setting the coupon value
     const couponValue = ()=>{
         let coupon;
@@ -68,6 +69,9 @@ export default function Cart({cart,dispatch,promo,user}) {
 
         setCoupon(coupon)
     }
+     couponValue()
+    }, [promo,itemtotal])
+
 
     function handleSubmitOrder (e){
         e.preventDefault()
@@ -81,11 +85,38 @@ export default function Cart({cart,dispatch,promo,user}) {
             console.log(body)
             projectFirestore.collection("orders")
             .add(body)
-            .then(docRef=>console.log("Document written with ID: ", docRef.id))
+            .then(docRef=>{
+                //setting the pop up body for a succesful order
+                const popupBody ={
+                    type:"Succes",
+                    title:"Order Placed :D",
+                    message:"Just sit back and let us handle from here",
+                    actions: [{
+                        type:"Succes",
+                        title:"My Orders",
+                        cb: ()=>{
+                            history.push("/my-orders")
+                            dispatch({type:"COPY",payload:[]})
+                            setIsPopupOpen(false)
+                        }
+                    }],
+
+                }
+                setPopupData(popupBody)
+                setIsPopupOpen(true)
+             })
             .catch(err=>console.log(err))
 
         }else{
-            alert("Login first!!!!!")
+            //setting the popup body if the user is not logged in
+            const popupBody = {
+                type:"Danger",
+                title:"Login Required!!!",
+                message:"If you dont have an account sign in",
+                actions: false
+            }
+            setPopupData(popupBody)
+            setIsPopupOpen(true)
         }
 
     }
@@ -161,10 +192,13 @@ export default function Cart({cart,dispatch,promo,user}) {
             {
             currentCartData.length < 4 &&
             <div className="add-more-items">
+            <div>
             <Link to="/">Add more items</Link>
+            </div>
             </div>}
             </section>
             }
+            {!loading && 
             <section className="price-description">
             <div className="coupon">
                 <label htmlFor="coupoun">Offers</label>
@@ -201,7 +235,7 @@ export default function Cart({cart,dispatch,promo,user}) {
                         </td>
                     </tr>
                     {
-                    coupon &&
+                        coupon &&
                     <tr>
                         <td>
                             Discount
@@ -229,12 +263,22 @@ export default function Cart({cart,dispatch,promo,user}) {
                 </button>
             </div>
             </section>
+        }
             </main>
         </div>
         {
             width > 600 && <Footer/>
         }
 
+        {
+            isPopupOpen &&
+            <Popup  
+            title={popupData.title} 
+            message={popupData.message}
+            type={popupData.type}
+            actions={popupData.actions}
+            status={setIsPopupOpen}/>
+        }
         </>
         
     )

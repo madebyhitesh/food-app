@@ -162,13 +162,13 @@
 
     // cart page
     .cart-page{
-        min-height: 60vh;
+        min-height: 70vh;
         main{
             flex-direction: row;
            // align-items: center;
             justify-content: space-around;
             //background-color: black;
-            height: 100%;
+            height: 50%;
             .products{
                 //min-height: 60vh;
                 height: 100%;
@@ -183,7 +183,7 @@
             }
 
             .price-description{
-                //position: fixed;
+                //position: static;
                 width: 50%;
                 padding: 0 1.4rem;
                 flex:.38;

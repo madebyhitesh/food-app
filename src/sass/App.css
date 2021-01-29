@@ -772,7 +772,8 @@ header .nav-icons .profile button {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  min-height: 92vh;
+  height: 100%;
+  min-height: 94vh;
 }
 
 .cart-page header {
@@ -916,6 +917,16 @@ header .nav-icons .profile button {
 }
 
 .cart-page main .add-more-items {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   text-align: center;
   margin-top: .4rem;
 }
@@ -1157,11 +1168,14 @@ header .nav-icons .profile button {
   border: none;
   border-radius: 2px;
   color: var(--not-normal-text);
-  background-color: var(--green-color);
 }
 
-.popup .actions button:nth-child(2) {
+.popup .actions button.Danger {
   background: var(--red-color);
+}
+
+.popup .actions button.Succes {
+  background: var(--green-color);
 }
 
 footer {
@@ -1445,7 +1459,7 @@ footer .bottom-section .contact {
             align-items: flex-end;
   }
   .cart-page {
-    min-height: 60vh;
+    min-height: 70vh;
   }
   .cart-page main {
     -webkit-box-orient: horizontal;
@@ -1454,7 +1468,7 @@ footer .bottom-section .contact {
             flex-direction: row;
     -ms-flex-pack: distribute;
         justify-content: space-around;
-    height: 100%;
+    height: 50%;
   }
   .cart-page main .products {
     height: 100%;

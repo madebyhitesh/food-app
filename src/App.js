@@ -133,7 +133,7 @@ function App() {
       <div className={theme ? 'App dark-mode' : 'App'} >
 
       <Router>
-          <Nav setTheme={setTheme} theme={theme} cart={state.cart} user={state.user}/>
+          <Nav setTheme={setTheme} theme={theme} cart={state.cart} user={state.user} dispatch={dispatch}/>
           <Switch>
 
             <Route path="/" exact >

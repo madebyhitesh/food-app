@@ -20,7 +20,8 @@ export default function Homepage({dispatch,cart}) {
     useEffect(()=>{
         const items = docs.filter(doc => doc.category === currentCategory)
         setCurrentMenuItem(items)
-    },[currentCategory])
+        // eslint-disable-line react-hooks/exhaustive-deps
+    },[currentCategory,docs])
 
     const allData =  useContext(DataContext)
 

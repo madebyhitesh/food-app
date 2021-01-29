@@ -2,12 +2,19 @@ import React,{useState,useEffect} from 'react'
 import {useLocation,Link} from 'react-router-dom'
 import firebase from 'firebase'
 import Overlay from "./Overlay"
-import {motion} from "framer-motion"
-export default function Nav({theme,setTheme,cart,user}) {
+import {motion} from "framer-motion";
+import Signup from './Signup'
+import Popup from './Popup'
+
+export default function Nav({theme,setTheme,cart,user,dispatch}) {
 
     const location =  useLocation()
     const [currentLocation,setCurrentLocation] =  useState(location.pathname)
     const [isOpen,setIsOpen] = useState(false);
+    const [isFormOpen,setFormOpen] =  useState(false)
+    const [isSignUp,setIsSignUp] =  useState(false);
+    const [isPopupOpen,setIsPopupOpen] =  useState(false)
+
 
     useEffect(() => {
         setCurrentLocation(location.pathname)
@@ -18,6 +25,12 @@ export default function Nav({theme,setTheme,cart,user}) {
     function signOut() {
         // [sign out the current user]
         firebase.auth().signOut() 
+    }
+
+      //handling opening and closing of signup modals
+      const handleFormModel =  (type)=>{
+        setFormOpen(!isFormOpen);
+        setIsSignUp(type)
     }
 
     return (
@@ -83,7 +96,9 @@ export default function Nav({theme,setTheme,cart,user}) {
                    <div className="profile">
                        {
                            !user.id ?
-                           <i className="fas fa-user-circle normal-text"></i> :
+                           <button className="btn transparent-button" onClick={()=>handleFormModel(false)}>
+                           Log In
+                          </button> :
                            <button className="btn transparent-button" onClick={()=>signOut()}>
                            Log Out
                           </button>
@@ -91,6 +106,24 @@ export default function Nav({theme,setTheme,cart,user}) {
                    </div>
                </div>
                {isOpen && <Overlay onClick={e=>setIsOpen(false)} />}
+               {
+                isFormOpen && 
+                <Signup 
+                status={setFormOpen} 
+                formtype={isSignUp} 
+                formtypeStatus={setIsSignUp} 
+                dispatch={dispatch}
+                popup={setIsPopupOpen}/>
+            }
+            {
+            isPopupOpen &&
+            <Popup 
+            title="Welcome" 
+            message="Your favourite food is just few clicks away" 
+            type="Succes"
+            status={setIsPopupOpen}
+            />
+            }
            </header>
     )
 }

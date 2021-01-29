@@ -65,10 +65,12 @@
             border: none;
             border-radius:2px ;
             color: var(--not-normal-text);
-            background-color: var(--green-color);
         }
-        button:nth-child(2){
+        button.Danger{
             background:var(--red-color);
+        }
+        button.Succes{
+            background:var(--green-color);
         }
     }
 }

@@ -3,7 +3,8 @@
     //padding:0 1rem;
     display: flex;
     flex-direction: column;
-    min-height: 92vh;
+    height: 100%;
+    min-height: 94vh;
     header{
         display: flex;
         align-items: center;
@@ -102,6 +103,10 @@
         }
         
         .add-more-items{
+            width: 100%;
+            display:flex;
+            justify-content:center;
+            align-items:center;
             text-align: center;
             margin-top: .4rem;
             a{
