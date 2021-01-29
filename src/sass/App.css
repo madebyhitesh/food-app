@@ -91,7 +91,7 @@ span.square.non-veg .circle {
   left: 0;
   right: 0;
   background-color: rgba(0, 0, 0, 0.8);
-  z-index: 111111111;
+  z-index: 5;
 }
 
 .loader {
@@ -192,7 +192,7 @@ header .nav-links {
   left: -200px;
   bottom: 0;
   background-color: var(--red-color);
-  z-index: 1111111111111111111111;
+  z-index: 9;
 }
 
 header .nav-links ul {
@@ -377,7 +377,7 @@ header .nav-icons .profile button {
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
-  z-index: 111111111111111111;
+  z-index: 9;
   background-color: var(--background);
   min-height: 300px;
   width: 90%;
@@ -612,7 +612,7 @@ header .nav-icons .profile button {
   padding: 1rem;
   border-radius: 6px;
   background-color: var(--background);
-  z-index: 1111111;
+  z-index: 1;
 }
 
 .home-page .cart-card .text-container {
@@ -668,7 +668,7 @@ header .nav-icons .profile button {
 
 .menu-page {
   background-color: black;
-  z-index: 111111111111;
+  z-index: 9;
   padding-top: 1rem;
 }
 
@@ -1088,7 +1088,7 @@ header .nav-icons .profile button {
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
-  z-index: 111111111111111111;
+  z-index: 10;
   background-color: var(--background);
   min-height: 200px;
   width: 90%;
@@ -1269,7 +1269,7 @@ footer .bottom-section .contact {
 
 @media all and (min-width: 600px) {
   .overlay {
-    z-index: 111111111111;
+    z-index: 5;
   }
   header .menu-icon {
     display: none;
