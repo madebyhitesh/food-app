@@ -1,0 +1,74 @@
+.my-orders{
+    background-color:var(--light-background);
+    height: 100%;
+    min-height: 94vh;
+    padding: 0 1rem;
+    
+    main{
+    display: grid;
+    grid-template-columns: 1fr;
+    }
+        
+
+}
+
+.single-order-container{
+    display: flex;
+    align-items:center;
+    justify-content:space-between;
+    flex-direction: column;
+    color:var(--normal-text);
+    background-color: var(--background);
+    width: 100%;
+    padding:.5rem;
+    border-radius:10px;
+    margin: .5rem 0;
+    line-height: 1.5rem;
+    font-size: 1.1rem;
+
+
+    .main-area,.toggle-area{
+        width:100%;
+        display: flex;
+        align-items:center;
+        justify-content:space-between;
+
+    .order-date-id{
+        text-align: left;
+        .order-date{
+            font-size: small;
+        }
+    }
+
+    .order-price-status{
+        text-align:right;
+    }
+
+    }
+    .toggle-area{
+        table{
+            width: 100%;
+            td:nth-child(2){
+                text-align: right;
+            }
+        }
+    }
+
+
+    .action{
+        margin-top: .4rem ;
+        width: 100%;
+        display:flex;
+        align-items:center;
+        justify-content: flex-end;
+        button{
+            font-size: 1rem;
+            border:none;
+            background:transparent;
+            color:var(--red-color);
+            opacity: .7;
+        }
+    }
+
+
+}

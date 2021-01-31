@@ -1,6 +1,5 @@
 import React,{useEffect,useContext,useState} from 'react'
 import DataContext from '../DataContext'
-import { motion} from "framer-motion";
 import Delivery from "../assets/delivery.svg"
 import useFirestore from "../firebase/useFirestore"
 import SubMenuItems from "./SubMenuItems"
@@ -63,28 +62,21 @@ export default function Homepage({dispatch,cart}) {
             <div className="carousel-header">
                 <h2 className="title-text">Special Menu</h2>
             </div>
-            <motion.div className="card-container" 
-            initial="hidden"
-            animate="visible"
-            variants={container}
-            >
+            <div className="card-container">
             {
                     allData.specialMenu.map((menuItem,idx)=>{
                         return(
-                            <motion.div className={`card ${menuItem.colorScheme}`} 
+                            <div className={`card ${menuItem.colorScheme}`} 
                             key={idx}
-                            initial="hidden"
-                            animate="visible"
-                            variants={container}
                             onClick={()=>onMenuClick(menuItem.title)}
                             >
-                            <motion.img src={menuItem.image} alt={menuItem.title} />
+                            <img src={menuItem.image} alt={menuItem.title} />
                             <h3 className="normal-text">{menuItem.title}</h3>
-                            </motion.div>
+                            </div>
                         )
                     })
                 }  
-            </motion.div>
+            </div>
             
             <div className="carousel-header">
                 <h2 className="title-text">Most Popular Items</h2>
@@ -92,35 +84,27 @@ export default function Homepage({dispatch,cart}) {
             
 
             
-                <motion.div className="card-container" 
-                  initial="hidden"
-                  animate="visible"
-                  variants={container}
-                >
+                <div className="card-container">
                 
                 {
                 docs.filter(doc=>popularItems.includes(doc.id)).map(card=>(
                         
-                <motion.div className="cart-card"
+                <div className="cart-card"
                 key={card.id}
                 initial="hidden"
                 animate="visible"
                 variants={container}
                 >
-                <motion.div className="hero"
-                variants={item}
-                >
+                <div className="hero">
                  <img src={card.image} alt={card.name}/>
-                </motion.div>
+                </div>
 
-                <motion.div className="text-container" 
-                variants={item}
-                >
+                <div className="text-container" >         
                 <h3 className="normal-text">{card.name}</h3>
                 <p className="light-text">by {card.chef}</p>
                 <h3 className="normal-text"><i className="fas fa-rupee-sign"></i> {card.price}</h3>
-                </motion.div>
-                <motion.div className="cart-button" 
+                </div>
+                <div className="cart-button" 
                 variants={item}
                 >
                 {
@@ -133,11 +117,11 @@ export default function Homepage({dispatch,cart}) {
                     Add to Cart
                 </button>
                 }
-                </motion.div>
-                </motion.div>   
+                </div>
+                </div>   
                 ))
                 }     
-                </motion.div>
+                </div>
 
                 <div className="flex-container">
                     <div className="text-container">

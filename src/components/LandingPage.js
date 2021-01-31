@@ -1,9 +1,9 @@
 import React,{useState} from 'react'
 import {motion} from "framer-motion"
-import landingImage from "../assets/landing.svg"
 import Homepage from './Homepage'
 import Signup from './Signup'
 import Popup from './Popup';
+import LandingImage from './LandingImage'
 
 export default function LandingPage({cart,dispatch,user}) {
 
@@ -56,7 +56,8 @@ export default function LandingPage({cart,dispatch,user}) {
            variants={variants}
            transition={{duration:.5,type:"spring"}}
            >
-               <img src={landingImage} alt="landing"/>
+               {/* <img src={landingImage} alt="landing"/> */}
+               <LandingImage/>
            </motion.div>
            </div>
            <div className="search-bar">
@@ -74,7 +75,8 @@ export default function LandingPage({cart,dispatch,user}) {
            variants={variants}
            transition={{duration:.5,type:"spring"}}
            >
-               <img src={landingImage} alt="landing"/>
+               {/* <img src={landingImage} alt="landing"/> */}
+               <LandingImage/>
            </motion.div>
            </div>
            </div>

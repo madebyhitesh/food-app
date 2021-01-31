@@ -101,7 +101,7 @@
 
     //menu page
     .menu-page{
-
+        z-index: 13;
         .items-container{
             grid-template-columns: 1fr 1fr 1fr 1fr;
         }
@@ -134,9 +134,6 @@
                 .social-icons{
                     width:40%;
                     margin-top:1rem;
-                    i{
-                        color:var(--red-color)
-                    }
                 }
             }
 
@@ -236,6 +233,23 @@
             }
         }
     }
+
+
+    //my orders page
+    .my-orders{
+        //background:white;
+        main{
+            grid-template-columns: 10% 1fr 10%;
+            gap: 0 1rem;
+
+           .single-order-container{
+               grid-column: 2/3;
+           }
+        }
+
+
+    }
+
 }
 
 

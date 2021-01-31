@@ -313,13 +313,9 @@ header .nav-icons .profile button {
 }
 
 .landing-page .image-wrapper .image-container {
+  margin-top: 1rem;
   width: 18rem;
   height: 18rem;
-}
-
-.landing-page .image-wrapper .image-container img {
-  width: 100%;
-  height: 100%;
 }
 
 .landing-page .image-wrapper.second {
@@ -668,8 +664,8 @@ header .nav-icons .profile button {
 
 .menu-page {
   background-color: black;
-  z-index: 9;
   padding-top: 1rem;
+  z-index: 13;
 }
 
 .menu-page .cross-btn {
@@ -1017,6 +1013,99 @@ header .nav-icons .profile button {
   cursor: pointer;
 }
 
+.my-orders {
+  background-color: var(--light-background);
+  height: 100%;
+  min-height: 94vh;
+  padding: 0 1rem;
+}
+
+.my-orders main {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr;
+      grid-template-columns: 1fr;
+}
+
+.single-order-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  color: var(--normal-text);
+  background-color: var(--background);
+  width: 100%;
+  padding: .5rem;
+  border-radius: 10px;
+  margin: .5rem 0;
+  line-height: 1.5rem;
+  font-size: 1.1rem;
+}
+
+.single-order-container .main-area, .single-order-container .toggle-area {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.single-order-container .main-area .order-date-id, .single-order-container .toggle-area .order-date-id {
+  text-align: left;
+}
+
+.single-order-container .main-area .order-date-id .order-date, .single-order-container .toggle-area .order-date-id .order-date {
+  font-size: small;
+}
+
+.single-order-container .main-area .order-price-status, .single-order-container .toggle-area .order-price-status {
+  text-align: right;
+}
+
+.single-order-container .toggle-area table {
+  width: 100%;
+}
+
+.single-order-container .toggle-area table td:nth-child(2) {
+  text-align: right;
+}
+
+.single-order-container .action {
+  margin-top: .4rem;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+.single-order-container .action button {
+  font-size: 1rem;
+  border: none;
+  background: transparent;
+  color: var(--red-color);
+  opacity: .7;
+}
+
 .offers-page {
   background-color: var(--light-background);
   padding: .5rem 1rem;
@@ -1213,6 +1302,7 @@ footer .top-section .social-icons {
 
 footer .top-section .social-icons i {
   font-size: 1.4rem;
+  color: var(--red-color);
 }
 
 footer .top-section .section-right {
@@ -1387,6 +1477,9 @@ footer .bottom-section .contact {
         -ms-flex-pack: end;
             justify-content: flex-end;
   }
+  .menu-page {
+    z-index: 13;
+  }
   .menu-page .items-container {
     -ms-grid-columns: 1fr 1fr 1fr 1fr;
         grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -1423,9 +1516,6 @@ footer .bottom-section .contact {
   footer .top-section .section-left .social-icons {
     width: 40%;
     margin-top: 1rem;
-  }
-  footer .top-section .section-left .social-icons i {
-    color: var(--red-color);
   }
   footer .top-section .section-right {
     -webkit-box-flex: .3;
@@ -1536,6 +1626,16 @@ footer .bottom-section .contact {
   .sign-up .sign-up-background img {
     height: 100%;
     width: 100%;
+  }
+  .my-orders main {
+    -ms-grid-columns: 10% 1fr 10%;
+        grid-template-columns: 10% 1fr 10%;
+    gap: 0 1rem;
+  }
+  .my-orders main .single-order-container {
+    -ms-grid-column: 2;
+    -ms-grid-column-span: 1;
+    grid-column: 2/3;
   }
 }
 

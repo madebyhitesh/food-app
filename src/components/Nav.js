@@ -6,7 +6,7 @@ import {motion} from "framer-motion";
 import Signup from './Signup'
 import Popup from './Popup'
 
-export default function Nav({theme,setTheme,cart,user,dispatch}) {
+const  Nav = ({theme,setTheme,cart,user,dispatch}) => {
 
     const location =  useLocation()
     const [currentLocation,setCurrentLocation] =  useState(location.pathname)
@@ -127,3 +127,5 @@ export default function Nav({theme,setTheme,cart,user,dispatch}) {
            </header>
     )
 }
+
+export default React.memo(Nav); 

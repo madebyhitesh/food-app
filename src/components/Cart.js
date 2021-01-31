@@ -79,7 +79,8 @@ export default function Cart({cart,dispatch,promo,user}) {
             const body = {
                 user_id:user.email,
                 cart:[...cart],
-                total: coupon ? itemtotal - coupon : itemtotal
+                total: coupon ? itemtotal - coupon : itemtotal,
+                timestamp: Date.now()
             }
 
             console.log(body)
