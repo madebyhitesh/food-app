@@ -45,6 +45,7 @@
         height:2.5rem;
         border-radius: 6px;
         background-color: var(--background);
+        position: relative;
         form{
             width:100%;
             display:flex;
@@ -60,6 +61,24 @@
                 color:var(--normal-text);
                 &::placeholder{
                     color:var(--light-text)
+                }
+            }
+        }
+
+        z-index: 2;
+        .searched-items{
+            position: absolute;
+            width: 100%;
+            .searched-item{
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                background-color: var(--background);
+                border-bottom: 1px solid var(--light-background);
+                padding:.5rem .3rem;
+                padding-top: 1rem;
+                p{
+                    color:var(--normal-text);
                 }
             }
         }

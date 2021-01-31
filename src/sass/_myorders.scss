@@ -25,7 +25,7 @@
     margin: .5rem 0;
     line-height: 1.5rem;
     font-size: 1.1rem;
-
+    transition: height .5s ease;
 
     .main-area,.toggle-area{
         width:100%;
@@ -65,7 +65,7 @@
             font-size: 1rem;
             border:none;
             background:transparent;
-            color:var(--red-color);
+            color:var(--green-color);
             opacity: .7;
         }
     }

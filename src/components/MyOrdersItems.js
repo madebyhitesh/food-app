@@ -26,8 +26,19 @@ const MyOrdersItems = ({item}) => {
      }
 
     const {id,cart,total,timestamp} = item;
+
+    //framer motion variants
+    const variants = {
+        hidden: { y: 20, opacity: 0 },
+        visible: {
+          y: 0,
+          opacity: 1
+        }
+    }
+
+
     return (
-        <motion.div className={ "single-order-container"} key={id}>
+        <div className={"single-order-container"} key={id}>
         <section className="main-area">
             <div className="order-date-id">
             <p className="order-id"><b>OrderId:</b> #{id.substr(1,8)}</p>
@@ -40,7 +51,12 @@ const MyOrdersItems = ({item}) => {
         </section>
         {
             isOpen &&
-            <section className="toggle-area">
+            <motion.section className="toggle-area" 
+            initial="hidden"
+            animate="visible"
+            variants={variants}
+            transition={{duration:.5,type:"spring"}}
+            >
             <table>
                 <tbody>
                 {cart.map(({item_id,quantity})=>(
@@ -51,12 +67,12 @@ const MyOrdersItems = ({item}) => {
             ))}
                 </tbody>
             </table>
-        </section> 
+        </motion.section> 
         }
         <div className="action">
         <button onClick={handleToggle}>{!isOpen ? "Show details" : "Hide Details"}</button>
         </div>
-    </motion.div>
+    </div>
     )
 }
 

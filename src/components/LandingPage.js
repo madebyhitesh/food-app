@@ -1,15 +1,35 @@
-import React,{useState} from 'react'
+import React,{useState,useMemo, useEffect} from 'react'
 import {motion} from "framer-motion"
 import Homepage from './Homepage'
 import Signup from './Signup'
 import Popup from './Popup';
 import LandingImage from './LandingImage'
+import useFirestore from '../firebase/useFirestore';
 
 export default function LandingPage({cart,dispatch,user}) {
 
     const [isFormOpen,setFormOpen] =  useState(false)
     const [isSignUp,setIsSignUp] =  useState(true);
     const [isPopupOpen,setIsPopupOpen] =  useState(false)
+    const [searchValue,setSearchValue] =  useState("");
+
+    const {docs} =  useFirestore("products");
+
+    
+
+    const searchFunc =  useMemo(() => {
+        if(searchValue){
+
+            const items =  docs.filter(doc =>{
+                return Object.keys(doc).some(key=>doc[key].toString().toLowerCase().includes(searchValue.toLowerCase()))
+            })
+            return items
+        }
+        return false
+        }, [searchValue])
+
+
+
 
     const variants = {
         hidden: { x: "100%" },
@@ -20,6 +40,12 @@ export default function LandingPage({cart,dispatch,user}) {
     const handleFormModel =  (type)=>{
         setFormOpen(!isFormOpen);
         setIsSignUp(type)
+    }
+
+    //handle value change of search input
+    const handleSearchChange =  (e)=>{
+        const value  = e.target.value;
+        setSearchValue(value);
     }
 
     return (
@@ -61,10 +87,37 @@ export default function LandingPage({cart,dispatch,user}) {
            </motion.div>
            </div>
            <div className="search-bar">
-               <form>
-               <input type="text" name="seach-input" placeholder="Enter your location"/>
+                <form>
+                <input type="text" 
+                name="seach-input" 
+                placeholder="What are you looking for?" 
+                value={searchValue} 
+                onChange={handleSearchChange}
+                autoComplete="off"
+                />
                 <button className="btn red-button" type="submit">Search</button>
                </form>
+               <div className="searched-items">
+    
+                   {
+                        searchFunc && searchFunc.map(({name,isVeg})=>(
+                        <div className="searched-item" >
+                            <p>{name}</p>
+
+                            {
+                                isVeg ?
+                                <span className="square veg">
+                                    <span className="circle"></span>
+                                </span>:
+                                <span className="square non-veg">
+                                    <span className="circle"></span>
+                                </span>
+                            }
+                        </div>
+                        ))
+                   }
+               </div>
+
            </div>
 
            </div>

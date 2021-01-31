@@ -328,6 +328,8 @@ header .nav-icons .profile button {
   height: 2.5rem;
   border-radius: 6px;
   background-color: var(--background);
+  position: relative;
+  z-index: 2;
 }
 
 .landing-page .search-bar form {
@@ -365,6 +367,31 @@ header .nav-icons .profile button {
 
 .landing-page .search-bar form input::placeholder {
   color: var(--light-text);
+}
+
+.landing-page .search-bar .searched-items {
+  position: absolute;
+  width: 100%;
+}
+
+.landing-page .search-bar .searched-items .searched-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  background-color: var(--background);
+  border-bottom: 1px solid var(--light-background);
+  padding: .5rem .3rem;
+  padding-top: 1rem;
+}
+
+.landing-page .search-bar .searched-items .searched-item p {
+  color: var(--normal-text);
 }
 
 .sign-up {
@@ -1049,6 +1076,8 @@ header .nav-icons .profile button {
   margin: .5rem 0;
   line-height: 1.5rem;
   font-size: 1.1rem;
+  -webkit-transition: height .5s ease;
+  transition: height .5s ease;
 }
 
 .single-order-container .main-area, .single-order-container .toggle-area {
@@ -1102,7 +1131,7 @@ header .nav-icons .profile button {
   font-size: 1rem;
   border: none;
   background: transparent;
-  color: var(--red-color);
+  color: var(--green-color);
   opacity: .7;
 }
 
