@@ -151,6 +151,7 @@ export default function LandingPage({cart,dispatch,user}) {
             message="Your favourite food is just few clicks away" 
             type="Succes"
             status={setIsPopupOpen}
+            isVisible={isPopupOpen}
             />
             }
        </>

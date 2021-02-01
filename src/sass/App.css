@@ -1,4 +1,4 @@
-*, *:before, *:after {
+*, *::before, *::after {
   margin: 0;
   padding: 0;
   -webkit-box-sizing: border-box;
@@ -92,6 +92,15 @@ span.square.non-veg .circle {
   right: 0;
   background-color: rgba(0, 0, 0, 0.8);
   z-index: 5;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .loader {
@@ -126,9 +135,17 @@ span.square.non-veg .circle {
   color: var(--not-normal-text);
 }
 
+.green-button:hover {
+  background-color: #56c482;
+}
+
 .red-button {
   background-color: var(--red-color);
   color: var(--not-normal-text);
+}
+
+.red-button:hover {
+  background-color: #d41125;
 }
 
 .transparent-button {
@@ -396,10 +413,6 @@ header .nav-icons .profile button {
 
 .sign-up {
   position: fixed;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
   z-index: 9;
   background-color: var(--background);
   min-height: 300px;
@@ -492,8 +505,32 @@ header .nav-icons .profile button {
   color: var(--normal-text);
 }
 
+.sign-up .feilds-container .feild input::-webkit-input-placeholder, .sign-up .feilds-container .feild button::-webkit-input-placeholder {
+  font-size: .9rem;
+}
+
+.sign-up .feilds-container .feild input:-ms-input-placeholder, .sign-up .feilds-container .feild button:-ms-input-placeholder {
+  font-size: .9rem;
+}
+
+.sign-up .feilds-container .feild input::-ms-input-placeholder, .sign-up .feilds-container .feild button::-ms-input-placeholder {
+  font-size: .9rem;
+}
+
+.sign-up .feilds-container .feild input::placeholder, .sign-up .feilds-container .feild button::placeholder {
+  font-size: .9rem;
+}
+
+.sign-up .feilds-container .feild input[type=email]:focus, .sign-up .feilds-container .feild input[type=password]:focus {
+  border: 2px solid var(--green-color);
+}
+
 .sign-up .feilds-container .feild button {
   background-color: var(--green-color);
+}
+
+.sign-up .feilds-container .feild button:hover {
+  background-color: #56c482;
 }
 
 .sign-up .feilds-container .feild .link-btn {
@@ -693,6 +730,7 @@ header .nav-icons .profile button {
   background-color: black;
   padding-top: 1rem;
   z-index: 13;
+  display: block;
 }
 
 .menu-page .cross-btn {
@@ -781,9 +819,146 @@ header .nav-icons .profile button {
 
 .menu-page .items-container .add-to-cart button {
   width: 100%;
+  height: 100%;
   border: none;
-  padding: .3rem .5rem;
+  padding: .4rem .5rem;
   border-radius: 6px;
+  -webkit-transition: .3s ease-in-out;
+  transition: .3s ease-in-out;
+  position: relative;
+  overflow: hidden;
+}
+
+.menu-page .items-container .add-to-cart button:active {
+  -webkit-transform: scale(0.9);
+          transform: scale(0.9);
+}
+
+.menu-page .items-container .add-to-cart button span {
+  pointer-events: none;
+}
+
+.menu-page .items-container .add-to-cart button .fa-shopping-cart {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  left: -20%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  font-size: 1rem;
+}
+
+.menu-page .items-container .add-to-cart button .fa-box {
+  position: absolute;
+  z-index: 3;
+  top: -40%;
+  left: 50%;
+  font-size: .7rem;
+  -webkit-transform: translate(-60%, -50%);
+          transform: translate(-60%, -50%);
+}
+
+.menu-page .items-container .add-to-cart button.clicked .fa-shopping-cart {
+  -webkit-animation: cart 1.5s ease-in-out forwards;
+          animation: cart 1.5s ease-in-out forwards;
+}
+
+.menu-page .items-container .add-to-cart button.clicked .fa-box {
+  -webkit-animation: box 1.5s ease-in-out forwards;
+          animation: box 1.5s ease-in-out forwards;
+}
+
+.menu-page .items-container .add-to-cart button.clicked span {
+  -webkit-animation: txt1 1.5s ease-in-out forwards;
+          animation: txt1 1.5s ease-in-out forwards;
+}
+
+@-webkit-keyframes cart {
+  0% {
+    left: -10%;
+  }
+  40%, 60% {
+    left: 50%;
+  }
+  100% {
+    left: 110%;
+  }
+}
+
+@keyframes cart {
+  0% {
+    left: -10%;
+  }
+  40%, 60% {
+    left: 50%;
+  }
+  100% {
+    left: 110%;
+  }
+}
+
+@-webkit-keyframes box {
+  0%, 40% {
+    top: -20%;
+  }
+  60% {
+    top: 40%;
+    left: 52%;
+  }
+  100% {
+    top: 40%;
+    left: 112%;
+  }
+}
+
+@keyframes box {
+  0%, 40% {
+    top: -20%;
+  }
+  60% {
+    top: 40%;
+    left: 52%;
+  }
+  100% {
+    top: 40%;
+    left: 112%;
+  }
+}
+
+@-webkit-keyframes txt1 {
+  0% {
+    opacity: 1;
+  }
+  20%, 100% {
+    opacity: 0;
+  }
+}
+
+@keyframes txt1 {
+  0% {
+    opacity: 1;
+  }
+  20%, 100% {
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes txt2 {
+  0%, 80% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes txt2 {
+  0%, 80% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 .cart-page {
@@ -1202,10 +1377,6 @@ header .nav-icons .profile button {
 .popup {
   position: fixed;
   position: fixed;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
   z-index: 10;
   background-color: var(--background);
   min-height: 200px;

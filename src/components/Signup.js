@@ -1,8 +1,9 @@
 import React,{useState,useEffect} from 'react'
 import Background from '../assets/landing.svg'
 import firebase from "firebase"
+import { motion } from "framer-motion";
 
-export default function Signup({status,formtype,formtypeStatus,dispatch,popup}) {
+export default function Signup({status,formtype,formtypeStatus,isVisible,popup}) {
     const [error,setError] =  useState(false);
     const [loading,setLoading] = useState(false);
     const [errorConfirmPassword,setErrorConfirmPassword] =  useState(false);
@@ -91,10 +92,19 @@ export default function Signup({status,formtype,formtypeStatus,dispatch,popup}) 
 
     }
 
+
     return (
         <div className="overlay" >
-            <div className="sign-up">
-            <button className="cross-btn" onClick={e=>status(false)}><i className="fas fa-times"></i></button>
+            <motion.div className="sign-up" 
+            initial={{ opacity: 0,y:"-50%",scale:.5}}
+            animate={{ opacity: 1,y:"0",scale:1}}
+            >
+            <motion.button className="cross-btn" onClick={e=>status(false)}
+            whileHover={{
+                rotate:180,
+                transition: { duration: .3 },
+              }}
+            ><i className="fas fa-times"></i></motion.button>
             <div className="sign-up-background">
                 <img src={Background} alt="background-signup"/>
             </div>
@@ -163,7 +173,7 @@ export default function Signup({status,formtype,formtypeStatus,dispatch,popup}) 
                 </div>
                 </div>
             </form>
-            </div>
+            </motion.div>
 
         </div>
     )

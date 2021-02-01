@@ -23,6 +23,17 @@ export default function SubMenuItems({data,status,title,dispatch,cart}) {
     opacity: 1
     }
     }
+
+    function handleAddtoCart(e,id) {
+    const el =  e.target;
+    el.classList.add('clicked')
+    setTimeout(()=>{
+        dispatch({type:"ADD",payload:{item_id:id,quantity:1}})
+        el.classList.remove('clicked')
+    },1500)
+    }
+
+    
     return (
         <div className="overlay menu-page">
             <button className="cross-btn" onClick={e=>status(false)}><i className="fas fa-times"></i></button>
@@ -56,11 +67,17 @@ export default function SubMenuItems({data,status,title,dispatch,cart}) {
                      {
                     cart.find(item=>item.item_id===id) ?
                     <div className="add-to-cart" onClick={()=>dispatch({type:"REMOVE",payload:id})}>
-                    <button className="red-button">Remove from Cart</button>
+                    <button className="red-button">
+                        Remove from Cart
+                        </button>
                      </div>
                      :
-                     <div className="add-to-cart" onClick={()=>dispatch({type:"ADD",payload:{item_id:id,quantity:1}})}>
-                         <button className="red-button">Add to Cart</button>
+                     <div className="add-to-cart" onClick={e=>handleAddtoCart(e,id)}>
+                         <button className="red-button">
+                             <span>Add to Cart</span>
+                             <i class="fas fa-shopping-cart"></i>
+                            <i class="fas fa-box"></i>
+                            </button>
                      </div>
                      }
                      

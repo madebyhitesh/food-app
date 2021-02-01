@@ -12,10 +12,18 @@
 .green-button{
     background-color: var(--green-color);
     color: var(--not-normal-text);
+
+    &:hover{
+        background-color: darken($color: $greenColor, $amount: 10%);
+    }
 }
 .red-button{
     background-color: var(--red-color);
     color: var(--not-normal-text);
+
+    &:hover{
+        background-color: darken($color: $redColor, $amount: 10%);
+    }
 }
 .transparent-button{
     background-color: transparent;

@@ -1,13 +1,23 @@
 import React from 'react'
-
-export default function Popup({status,actions,message,type,title}) {
+import {motion} from 'framer-motion'
+export default function Popup({status,actions,message,type,title,isVisible}) {
 
     
 
     return (
         <div className="overlay">
-        <div className="popup">
-            <button className="cross-btn" onClick={e=>status(false)}><i className="fas fa-times"></i></button>
+        {isVisible && (
+        <motion.div className="popup" 
+        initial={{ opacity: 0,y:"-50%",scale:0}}
+        animate={{ opacity: 1,y:"0",scale:1}}
+        key={type}
+        >
+            <motion.button className="cross-btn" onClick={e=>status(false)}
+            whileHover={{
+                rotate:180,
+                transition: { duration: .3 },
+              }}
+            ><i className="fas fa-times"></i></motion.button>
             {/* if the modal type is "Succes" */}
             {type === "Succes" && 
             <div className="icon">
@@ -29,12 +39,13 @@ export default function Popup({status,actions,message,type,title}) {
             <div className="actions" >
             {   
             actions.map(({type,cb,title})=>(
-            <button className={type} key={type} onClick={()=>cb()}>{title}</button>
-            ))
+                <button className={type} key={type} onClick={()=>cb()}>{title}</button>
+                ))
             }
             </div>
             }
-        </div>
+        </motion.div>
+        )}
         </div>
     )
 }

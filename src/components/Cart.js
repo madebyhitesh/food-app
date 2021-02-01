@@ -278,7 +278,9 @@ export default function Cart({cart,dispatch,promo,user}) {
             message={popupData.message}
             type={popupData.type}
             actions={popupData.actions}
-            status={setIsPopupOpen}/>
+            status={setIsPopupOpen}
+            isVisible={isPopupOpen}
+            />
         }
         </>
         

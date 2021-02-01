@@ -1,8 +1,8 @@
 .sign-up{
     position: fixed;
-    top:50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
+    // top:50%;
+    // left: 50%;
+    // transform: translate(-50%,-50%);
     z-index: 9;
     background-color: var(--background);
     min-height: 300px;
@@ -73,10 +73,25 @@
                 border:none;
                 border-radius:6px;
                 color:var(--normal-text);
+                
+
+                &::placeholder{
+                    font-size: .9rem;
+                }
+            }
+
+            input[type= email],input[type= password]{
+                &:focus{
+                    border:2px solid var(--green-color);
+                }
             }
 
             button{
                 background-color:var(--green-color);
+
+                &:hover{
+                    background-color: darken($color: $greenColor, $amount: 10%);
+                }
             }
             .link-btn{
                 border:none;
