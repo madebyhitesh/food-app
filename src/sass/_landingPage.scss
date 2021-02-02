@@ -70,6 +70,7 @@
             position: absolute;
             width: 100%;
             .searched-item{
+                color: var(--normal-text);
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
@@ -82,7 +83,7 @@
                 }
                 &:hover{
                     cursor: pointer;
-                    background-color: lighten($greenColor,30%);
+                    background-color:rgba(240, 240, 240, 0.384);
                 }
             }
         }

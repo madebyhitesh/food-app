@@ -30,6 +30,13 @@ input, button {
 
 button {
   cursor: pointer;
+  -webkit-transition: .3s ease;
+  transition: .3s ease;
+}
+
+button:active {
+  -webkit-transform: scale(0.9);
+          transform: scale(0.9);
 }
 
 a {
@@ -392,6 +399,7 @@ header .nav-icons .profile button {
 }
 
 .landing-page .search-bar .searched-items .searched-item {
+  color: var(--normal-text);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -413,7 +421,7 @@ header .nav-icons .profile button {
 
 .landing-page .search-bar .searched-items .searched-item:hover {
   cursor: pointer;
-  background-color: #edf9f2;
+  background-color: rgba(240, 240, 240, 0.384);
 }
 
 .sign-up {
@@ -1575,6 +1583,7 @@ footer .bottom-section .contact {
     height: 100%;
     left: 0;
     background-color: transparent;
+    z-index: 4;
   }
   header .nav-links ul {
     -webkit-box-orient: horizontal;

@@ -1,17 +1,19 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Delivery from "../assets/delivery.svg"
 import useFirestore from "../firebase/useFirestore"
 import SubMenuItems from "./SubMenuItems"
 import Footer from './Footer';
 import { specialMenu } from "../data"
+import { GlobalContext } from '../GlobalContext';
 
-export default function Homepage({ dispatch, cart }) {
+export default function Homepage() {
 
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     const [currentCategory, setCurrentCategory] = useState("")
     const [currentMenuItem, setCurrentMenuItem] = useState([])
     const [popularItems] = useState(["4MVcMDuBk9UHE1gKmPYP", "T2kJy9BXRG9SHTrvndfs", "fE2A2ZC9fhZRRf89iq0R", "CBzonQXWX8a5A7w2vhWn", "x9mRKsRTeywXXA6KtehA"]);
 
+    const { state: { cart }, dispatch } = useContext(GlobalContext);
 
     const { docs } = useFirestore("products"); //all the products available 
 

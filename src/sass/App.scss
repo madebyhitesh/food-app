@@ -32,6 +32,10 @@ input,button{
 
 button{
     cursor: pointer;
+    transition: .3s ease;
+    &:active{
+        transform: scale(.9);
+    }
 }
 
 a{

@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState, useCallback, useContext } from 'react'
 import { motion } from "framer-motion"
 import Homepage from './Homepage'
 import Signup from './Signup'
@@ -6,8 +6,9 @@ import Popup from './Popup';
 import LandingImage from './LandingImage'
 import SelectedProductPopup from './SelectedProductPopup'
 import useFirestore from '../firebase/useFirestore';
+import { GlobalContext } from '../GlobalContext';
 
-export default function LandingPage({ cart, dispatch, user }) {
+export default function LandingPage() {
 
     const [isFormOpen, setFormOpen] = useState(false)
     const [isSignUp, setIsSignUp] = useState(true);
@@ -15,6 +16,9 @@ export default function LandingPage({ cart, dispatch, user }) {
     const [searchValue, setSearchValue] = useState("");
     const [selectedItem, setSelectedItem] = useState(null)
     const [isVisible, setIsVisible] = useState(false)
+
+    const { state: { cart, user }, dispatch } = useContext(GlobalContext);
+
 
     const { docs } = useFirestore("products");
 
@@ -105,7 +109,7 @@ export default function LandingPage({ cart, dispatch, user }) {
                             </motion.div>
                         </div>
                         <div className="search-bar">
-                            <form>
+                            <form onSubmit={(e) => e.preventDefault()}>
                                 <input type="text"
                                     name="seach-input"
                                     placeholder="What are you looking for?"
@@ -113,7 +117,7 @@ export default function LandingPage({ cart, dispatch, user }) {
                                     onChange={handleSearchChange}
                                     autoComplete="off"
                                 />
-                                <button className="btn red-button" type="submit">Search</button>
+                                <button className="btn red-button">Search</button>
                             </form>
                             <div className="searched-items">
 

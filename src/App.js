@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer } from "react"
+import React, { useState, useEffect, useReducer, useMemo } from "react"
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
@@ -8,6 +8,8 @@ import Nav from "./components/Nav"
 import Offers from "./components/Offers"
 import './sass/App.css'
 import MyOrders from "./components/MyOrders"
+import { GlobalContext } from "./GlobalContext"
+
 
 const initialState = { cart: [], promo: {}, user: false };
 
@@ -66,7 +68,8 @@ function App() {
   //reducer for the cart
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  console.log(state);
+  const globalState = useMemo(() => ({ state, dispatch }), [state, dispatch])
+
   //checking the current user state
   function currentUserState() {
     firebase.auth().onAuthStateChanged((user) => {
@@ -137,36 +140,32 @@ function App() {
           <div className="loader"><h1>Loading...</h1></div>
           :
           <div className={theme ? 'App dark-mode' : 'App'} >
-
-            <Router>
-              <Nav setTheme={setTheme} theme={theme} cart={state.cart} user={state.user} dispatch={dispatch} />
-              <Switch>
-
-                <Route path="/" exact >
-                  <LandingPage setTheme={setTheme} theme={theme} cart={state.cart} user={state.user} dispatch={dispatch} />
-                </Route>
-
-                <Route path="/cart" exact>
-                  <Cart cart={state.cart} promo={state.promo} dispatch={dispatch} user={state.user} />
-                </Route>
-
-                <Route path="/offers" exact>
-                  <Offers dispatch={dispatch} currentOffer={state.promo} />
-                </Route>
-
-                {
-                  state.user &&
-                  <Route path="/my-orders">
-                    <MyOrders user={state.user} />
+            <GlobalContext.Provider value={globalState}>
+              <Router>
+                <Nav setTheme={setTheme} theme={theme} />
+                <Switch>
+                  <Route path="/" exact >
+                    <LandingPage />
                   </Route>
-                }
-
-              </Switch>
-
-            </Router>
-
-
-
+                  <Route path="/cart" exact>
+                    <Cart />
+                  </Route>
+                  <Route path="/offers" exact>
+                    <Offers />
+                  </Route>
+                  <Route path="/contact" exact>
+                    <header><h1 className="green-text">In Development</h1></header>
+                  </Route>
+                  {
+                    //my orders component will only be available if the user is logged in
+                    state.user &&
+                    <Route path="/my-orders">
+                      <MyOrders />
+                    </Route>
+                  }
+                </Switch>
+              </Router>
+            </GlobalContext.Provider>
           </div>
       }
     </>
