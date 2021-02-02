@@ -88,6 +88,11 @@ function App() {
 
   }
 
+  // Disable console log on production
+  if (process.env.NODE_ENV === 'production') {
+    console.log = function () { };
+  }
+
 
   useEffect(() => {
 
