@@ -1,21 +1,21 @@
-import firebase from "firebase"
+import firebase from "firebase/app";
 import "firebase/storage"
 import "firebase/firestore"
- 
- // Your web app's Firebase configuration
- var firebaseConfig = {
-    apiKey: "AIzaSyAaVy75Q2YA78FnuM7I6PMT0_uvn86q28g",
-    authDomain: "foodapp-hitesh.firebaseapp.com",
-    projectId: "foodapp-hitesh",
-    storageBucket: "foodapp-hitesh.appspot.com",
-    messagingSenderId: "977111647693",
-    appId: "1:977111647693:web:eb9f83fef6850eb8323084"
-  };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
+
+// Your web app's Firebase configuration
+var firebaseConfig = {
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTHDOMAI,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_API_ID
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
 
 
-  const projectStorage = firebase.storage();
-  const projectFirestore =  firebase.firestore()
-  
-  export {projectFirestore,projectStorage};
+const projectStorage = firebase.storage();
+const projectFirestore = firebase.firestore()
+
+export { projectFirestore, projectStorage };

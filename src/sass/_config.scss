@@ -14,7 +14,7 @@
     color: var(--not-normal-text);
 
     &:hover{
-        background-color: darken($color: $greenColor, $amount: 10%);
+        background-color: darken($color: $greenColor, $amount: 15%);
     }
 }
 .red-button{
@@ -22,7 +22,7 @@
     color: var(--not-normal-text);
 
     &:hover{
-        background-color: darken($color: $redColor, $amount: 10%);
+        background-color: darken($color: $redColor, $amount: 15%);
     }
 }
 .transparent-button{

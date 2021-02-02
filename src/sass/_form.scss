@@ -88,9 +88,12 @@
 
             button{
                 background-color:var(--green-color);
-
+                transition: .3s ease;
                 &:hover{
                     background-color: darken($color: $greenColor, $amount: 10%);
+                }
+                &:active{
+                    transform:scale(.9);
                 }
             }
             .link-btn{

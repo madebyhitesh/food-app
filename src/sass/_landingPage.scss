@@ -80,9 +80,13 @@
                 p{
                     color:var(--normal-text);
                 }
+                &:hover{
+                    cursor: pointer;
+                    background-color: lighten($greenColor,30%);
+                }
             }
         }
     }
-
+    
 
 }

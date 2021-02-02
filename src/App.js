@@ -1,6 +1,7 @@
-import React,{useState,useEffect,useReducer} from "react"
-import firebase from 'firebase'
-import {BrowserRouter as Router,Route,Switch} from "react-router-dom"
+import React, { useState, useEffect, useReducer } from "react"
+import firebase from 'firebase/app'
+import 'firebase/auth'
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
 import Cart from "./components/Cart"
 import LandingPage from "./components/LandingPage"
 import Nav from "./components/Nav"
@@ -8,14 +9,14 @@ import Offers from "./components/Offers"
 import './sass/App.css'
 import MyOrders from "./components/MyOrders"
 
-const initialState = {cart: [],promo : {},user:false};
+const initialState = { cart: [], promo: {}, user: false };
 
 const reducer = (state, action) => {
   switch (action.type) {
     case 'ADD':
       return {
         ...state,
-        cart:[action.payload,...state.cart]
+        cart: [action.payload, ...state.cart]
       };
     case 'REMOVE':
       return {
@@ -25,33 +26,33 @@ const reducer = (state, action) => {
     case "COPY":
       return {
         ...state,
-        cart:[...action.payload]
+        cart: [...action.payload]
       };
     case "SETQUANTITY":
-      const {item_id,quantity} = action.payload;
-      const item = state.cart.find(item=>item.item_id === item_id);
-      if(item)
-      item.quantity = quantity;
+      const { item_id, quantity } = action.payload;
+      const item = state.cart.find(item => item.item_id === item_id);
+      if (item)
+        item.quantity = quantity;
       return {
         ...state,
-        cart : [...state.cart]
+        cart: [...state.cart]
       }
-     case "ADDPROMO" :
-       return{
-         ...state,
-         promo : {...action.payload}
-       }
-     case "REMOVEPROMO" :
-       return{
-         ...state,
-         promo : {}
-       }
-      case "SETUSER" :
-        return {
-          ...state,
-          user: action.payload
-        }
-      
+    case "ADDPROMO":
+      return {
+        ...state,
+        promo: { ...action.payload }
+      }
+    case "REMOVEPROMO":
+      return {
+        ...state,
+        promo: {}
+      }
+    case "SETUSER":
+      return {
+        ...state,
+        user: action.payload
+      }
+
     default:
       throw new Error();
   }
@@ -59,28 +60,28 @@ const reducer = (state, action) => {
 
 
 function App() {
-  const [theme,setTheme] = useState(false)
-  const [loading,setLoading] = useState(true)
+  const [theme, setTheme] = useState(false)
+  const [loading, setLoading] = useState(true)
 
   //reducer for the cart
-  const [state,dispatch] =  useReducer(reducer,initialState);
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   console.log(state);
   //checking the current user state
-  function currentUserState (){
-      firebase.auth().onAuthStateChanged((user) => {
+  function currentUserState() {
+    firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         // User is signed in, see docs for a list of available properties
         const object = {
-          id:user.uid,
+          id: user.uid,
           email: user.email
         }
-        dispatch({type:"SETUSER", payload: object})
+        dispatch({ type: "SETUSER", payload: object })
         // ...
       } else {
         // User is signed out
         console.log("user has signed out")
-        dispatch({type:"SETUSER", payload: false})
+        dispatch({ type: "SETUSER", payload: false })
 
       }
     });
@@ -94,77 +95,77 @@ function App() {
     currentUserState()
 
     //setting default value of theme when user opens the sight for first time
-    if(localStorage.getItem("theme")){
-      const currentTheme =  localStorage.getItem("theme")
-      if(currentTheme === 'light')
-      setTheme(false)
+    if (localStorage.getItem("theme")) {
+      const currentTheme = localStorage.getItem("theme")
+      if (currentTheme === 'light')
+        setTheme(false)
       else
-      setTheme(true)
+        setTheme(true)
     }
-    else{
-      localStorage.setItem("theme","light")
+    else {
+      localStorage.setItem("theme", "light")
     }
 
     //setting the cart for the first time;
-    if(localStorage.getItem("cart")){
+    if (localStorage.getItem("cart")) {
       const currentCart = JSON.parse(localStorage.getItem("cart"));
-      dispatch({type:"COPY",payload:currentCart})
+      dispatch({ type: "COPY", payload: currentCart })
     }
   }, [])
 
   useEffect(() => {
-    if(theme)
-    localStorage.setItem("theme","dark")
+    if (theme)
+      localStorage.setItem("theme", "dark")
     else
-    localStorage.setItem("theme","light")
+      localStorage.setItem("theme", "light")
   }, [theme])
 
 
-  useEffect(()=>{
-    localStorage.setItem("cart",JSON.stringify(state.cart))
-  },[state.cart])
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(state.cart))
+  }, [state.cart])
 
   return (
     <>
-    {
-      loading ?
-      <div className="loader"><h1>Loading...</h1></div>
-      :
-      <div className={theme ? 'App dark-mode' : 'App'} >
+      {
+        loading ?
+          <div className="loader"><h1>Loading...</h1></div>
+          :
+          <div className={theme ? 'App dark-mode' : 'App'} >
 
-      <Router>
-          <Nav setTheme={setTheme} theme={theme} cart={state.cart} user={state.user} dispatch={dispatch}/>
-          <Switch>
+            <Router>
+              <Nav setTheme={setTheme} theme={theme} cart={state.cart} user={state.user} dispatch={dispatch} />
+              <Switch>
 
-            <Route path="/" exact >
-            <LandingPage setTheme={setTheme} theme={theme} cart={state.cart} user={state.user} dispatch={dispatch}/>
-            </Route>
+                <Route path="/" exact >
+                  <LandingPage setTheme={setTheme} theme={theme} cart={state.cart} user={state.user} dispatch={dispatch} />
+                </Route>
 
-            <Route path="/cart" exact>
-              <Cart cart={state.cart} promo={state.promo} dispatch={dispatch} user={state.user}/>
-            </Route>
+                <Route path="/cart" exact>
+                  <Cart cart={state.cart} promo={state.promo} dispatch={dispatch} user={state.user} />
+                </Route>
 
-            <Route path="/offers" exact>
-              <Offers dispatch={dispatch} currentOffer={state.promo}/>
-            </Route>
+                <Route path="/offers" exact>
+                  <Offers dispatch={dispatch} currentOffer={state.promo} />
+                </Route>
 
-            {
-              state.user &&
-              <Route path="/my-orders">
-                <MyOrders user={state.user}/>              
-              </Route>
-            }
+                {
+                  state.user &&
+                  <Route path="/my-orders">
+                    <MyOrders user={state.user} />
+                  </Route>
+                }
 
-          </Switch>
+              </Switch>
 
-        </Router>
+            </Router>
 
-        
-       
-    </div>
-    }
+
+
+          </div>
+      }
     </>
-    
+
   );
 }
 
